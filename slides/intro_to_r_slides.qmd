@@ -1,0 +1,1421 @@
+---
+title: |
+  | \huge A Brief Introduction to
+  | \huge Programming with R
+subtitle: "MEcon/MIQEF Introductory Week"
+author: "Erik Senn & Jeremia Stalder"
+date: "September 5, 2025"
+format:
+  beamer:
+    theme: default
+    colortheme: default
+    fonttheme: default
+    navigation: horizontal
+    section-titles: true
+    toc: false
+    slide-level: 3
+    fig-width: 5
+    fig-height: 3
+    fig-align: center
+    df-print: kable
+    fontsize: 10pt
+    aspectratio: 169
+    keep-tex: false
+    latex-engine: xelatex
+    include-in-header:
+      text: |
+        \usepackage{fontspec}
+        \usepackage{tikz}
+        \usetikzlibrary{shapes,arrows,positioning}
+
+        % Colors
+        \definecolor{mDarkBlue}{HTML}{23373b}
+        \definecolor{mLightBlue}{HTML}{0066CC}
+        \definecolor{mAccent}{HTML}{EB811B}
+        \definecolor{mGray}{HTML}{4A4A4A}
+        \definecolor{mLightGray}{HTML}{F5F5F5}
+        \definecolor{mBackground}{HTML}{FAFAFA}
+        \definecolor{mGreen}{HTML}{14B03D}
+        \definecolor{mPurple}{HTML}{6B3AA0}
+
+        % Fonts (fallbacks)
+        \IfFontExistsTF{Fira Sans}{\setsansfont{Fira Sans}}{%
+          \IfFontExistsTF{Helvetica Neue}{\setsansfont{Helvetica Neue}}{\setsansfont{Arial}}}
+
+        % Body text size
+        \setbeamerfont{normal text}{size=\normalsize}
+        % All slide titles (##) as \huge
+        \setbeamerfont{frametitle}{size=\huge,series=\bfseries}
+        \setbeamerfont{section title}{size=\huge,series=\bfseries}
+        \setbeamerfont{subsection title}{size=\huge,series=\bfseries}
+
+        % Beamer colors
+        \setbeamercolor{normal text}{fg=mDarkBlue}
+        \setbeamercolor{alerted text}{fg=mAccent}
+        \setbeamercolor{example text}{fg=mLightBlue}
+        \setbeamercolor{structure}{fg=mDarkBlue}
+        \setbeamercolor{title}{fg=white,bg=mDarkBlue}
+        \setbeamercolor{frametitle}{fg=mDarkBlue,bg=mBackground}
+        \setbeamercolor{section in toc}{fg=mDarkBlue}
+        \setbeamercolor{subsection in toc}{fg=mGray}
+        \setbeamertemplate{navigation symbols}{}
+
+        % Frame title with rule
+        \setbeamertemplate{frametitle}{
+          \vspace{0.4em}\insertframetitle\vspace{0em}
+          \textcolor{mAccent}{\rule{\textwidth}{2pt}}
+        }
+
+        % Section page
+        \AtBeginSection[]{
+          \begin{frame}[plain]
+            \vfill\centering
+            \begin{beamercolorbox}[sep=12pt,center,shadow=false,rounded=true]{title}
+              {\Huge\bfseries\insertsectionhead\par}
+            \end{beamercolorbox}
+            \vfill
+          \end{frame}
+        }
+
+        % Footline
+        \setbeamertemplate{footline}{
+          \hbox{%
+          \begin{beamercolorbox}[wd=.5\paperwidth,ht=2.25ex,dp=1ex,left]{author in head/foot}%
+            \hspace{2ex}\usebeamerfont{author in head/foot}\insertshortauthor
+          \end{beamercolorbox}%
+          \begin{beamercolorbox}[wd=.5\paperwidth,ht=2.25ex,dp=1ex,right]{date in head/foot}%
+            \usebeamerfont{date in head/foot}\insertframenumber{} / \inserttotalframenumber\hspace{2ex}
+          \end{beamercolorbox}}%
+        }
+
+        % Lists
+        \setbeamertemplate{itemize item}{\textcolor{mLightBlue}{$\bullet$}}
+        \setbeamertemplate{itemize subitem}{\textcolor{mGray}{$\circ$}}
+        \setbeamertemplate{itemize subsubitem}{\textcolor{mGray}{$-$}}
+        \setbeamertemplate{enumerate item}{\textcolor{mLightBlue}{\arabic{enumi}.}}
+        \setbeamertemplate{enumerate subitem}{\textcolor{mGray}{\alph{enumii}.}}
+        \setlength{\itemsep}{0.5em}
+        \setlength{\parskip}{0.3em}
+
+        % Blocks
+        \setbeamercolor{block title}{fg=white,bg=mLightBlue}
+        \setbeamercolor{block body}{fg=mDarkBlue,bg=mLightGray}
+        \setbeamercolor{block title alerted}{fg=white,bg=mAccent}
+        \setbeamercolor{block body alerted}{fg=mDarkBlue,bg=mAccent!10}
+
+        % Custom text macros (used in slides)
+        \newcommand{\keyword}[1]{\textcolor{mLightBlue}{\textbf{#1}}}
+        \newcommand{\accenttext}[1]{\textcolor{mAccent}{\textbf{#1}}}
+        \newcommand{\highlight}[1]{\textcolor{mGreen}{\textbf{#1}}}
+        \newcommand{\important}[1]{\textcolor{mPurple}{\textbf{#1}}}
+
+        % ---- Code blocks: normalsize + extra vertical space via hooks ----
+        \usepackage{etoolbox}
+
+        % Default size
+        \newcommand{\CodeSize}{\normalsize}
+        \newcommand{\SetCodeSize}[1]{\gdef\CodeSize{#1}}
+        
+        % Hooks for Pandoc's Highlighting environment
+        \AtBeginEnvironment{Highlighting}{\vspace{2pt}\CodeSize}
+        \AfterEndEnvironment{Highlighting}{\vspace{2pt}\SetCodeSize{\normalsize}}
+        
+        % Also adjust font used inside
+        \makeatletter
+        \def\verbatim@font{\CodeSize\ttfamily}
+        \makeatother
+
+classoption:
+  - compress
+  - fragile
+execute:
+  echo: true
+  warning: false
+  message: false
+  comment: ""
+  R.options:
+    width: 50
+---
+
+```{r setup, include=FALSE}
+library(ggplot2)
+library(readxl)
+library(haven)
+library(stargazer)
+library(knitr)
+library(tidyverse)
+
+# Create a modern theme for plots
+theme_modern <- function() {
+  theme_minimal(base_size = 10) +
+    theme(
+      plot.background = element_rect(fill = "white", color = NA),
+      panel.grid.major = element_line(color = "#E0E0E0", size = 0.3),
+      panel.grid.minor = element_blank(),
+      text = element_text(family = "sans", color = "#23373b"),
+      axis.text = element_text(color = "#4A4A4A"),
+      axis.title = element_text(face = "bold", size = 11),
+      plot.title = element_text(face = "bold", size = 14, hjust = 0),
+      plot.subtitle = element_text(size = 12, hjust = 0, color = "#4A4A4A"),
+      legend.position = "bottom",
+      legend.title = element_text(face = "bold"),
+      strip.text = element_text(face = "bold")
+    )
+}
+
+theme_set(theme_modern())
+set.seed(123)
+
+# Modern color palette
+modern_colors <- c("#0066CC", "#EB811B", "#14B03D", "#CC0033", "#6B3AA0", "#F7B500")
+scale_color_modern <- function(...) scale_color_manual(values = modern_colors, ...)
+scale_fill_modern <- function(...) scale_fill_manual(values = modern_colors, ...)
+
+options(
+  width = 50,
+  scipen = 999,
+  digits = 3
+)
+
+opts_chunk$set(
+  tidy = FALSE,
+  size = "normalsize"
+)
+```
+
+# Part I: Background / Tools {.section}
+
+### Schedule
+
+\begin{columns}[T]
+\begin{column}{0.48\textwidth}
+\textbf{Morning Sessions}
+
+\textcolor{mLightBlue}{09:15 - 10:00} \\
+Introduction, Background, Tools
+
+\textcolor{mLightBlue}{10:00 - 10:15} \\
+Break, support with installations
+
+\textcolor{mLightBlue}{10:15 - 11:00} \\
+Exercises, First steps with R
+
+\textcolor{mLightBlue}{11:00 - 11:15} \\
+Break, Q\&A
+
+\textcolor{mLightBlue}{11:15 - 12:00} \\
+First steps with R, Concepts
+\end{column}
+
+\begin{column}{0.48\textwidth}
+\textbf{Afternoon Sessions}
+
+\textcolor{mLightBlue}{12:00 - 13:15} \\
+Lunch (individually)
+
+\textcolor{mLightBlue}{13:15 - 14:00} \\
+Exercises
+
+\textcolor{mLightBlue}{14:00 - 14:15} \\
+Break, Q\&A
+
+\textcolor{mLightBlue}{14:15 - 15:00} \\
+Working with Data
+\end{column}
+\end{columns}
+
+### Welcome
+
+\begin{enumerate}
+\tightlist
+\item \keyword{Fire up} your notebooks!
+
+\vspace{0.3em}
+
+\item \keyword{Download} (or clone) the course materials
+  \begin{itemize}
+  \item \href{https://github.com/ErikSenn/intro_to_r_2025/}{\textcolor{mLightBlue}{GitHub Repository}}
+  \item Course slides available online
+  \end{itemize}
+\end{enumerate}
+
+## Why learn to program (now)?
+
+### Background: Technological change
+
+:::::: {.columns}
+::: {.column width="60%"}
+\vspace{1em}
+\Large
+\begin{itemize}
+\item Computers have become \keyword{omnipresent}
+
+\vspace{0.3em}
+
+\item Data is one of the world's most \accenttext{valuable resources}
+
+\vspace{0.3em}
+
+\item \highlight{AI and machine learning} are reshaping every business and industry
+\end{itemize}
+:::
+
+::: {.column width="40%"}
+
+:::
+::::::
+
+### Perspective: Data Science and Economics
+
+\begin{overprint}
+  \only<1>{\includegraphics[width=.9\textwidth]{img/Slide7.jpg}}
+  \only<2>{\includegraphics[width=.9\textwidth]{img/Slide6.jpg}}
+  \only<3>{\includegraphics[width=.9\textwidth]{img/Slide5.jpg}}
+  \only<4>{\includegraphics[width=.9\textwidth]{img/Slide4.jpg}}
+  \only<5>{\includegraphics[width=.9\textwidth]{img/Slide3.jpg}}
+  \only<6>{\includegraphics[width=.9\textwidth]{img/Slide2.jpg}}
+  \only<7>{\includegraphics[width=.9\textwidth]{img/Slide1.jpg}}
+\end{overprint}
+
+## Why R?
+
+### A data language
+
+:::::: {.columns}
+::: {.column width="50%"}
+\vspace{1em}
+- Widely used in \keyword{data science} jobs
+
+\vspace{0.5em}
+
+- Particularly adapted to program with \accenttext{data}
+
+\vspace{0.5em}
+
+- Originally designed for \highlight{statistical analysis}
+
+\vspace{0.5em}
+
+- Competing with Python as the \important{top data science language}
+:::
+
+::: {.column width="50%"}
+\includegraphics[width=.5\textwidth]{img/R_logo.png}
+\vspace{1em}
+\includegraphics[width=.5\textwidth]{img/Python_logo.png}
+:::
+::::::
+
+### A high-level language
+
+:::::: {.incremental}
+- \keyword{Relatively easy} to learn
+
+\vspace{0.3em}
+
+- Extensive \accenttext{free resources}:
+  - \href{https://www.datacamp.com/courses/free-introduction-to-r}{\textcolor{mLightBlue}{DataCamp: Introduction to R}}
+  - \href{https://www.rstudio.com/resources/cheatsheets/}{\textcolor{mLightBlue}{RStudio Cheatsheets}}
+  - \href{https://stackoverflow.com/}{\textcolor{mLightBlue}{Stack Overflow}}
+::::::
+
+
+## The Tools
+
+### R
+
+\keyword{R} is the \accenttext{programming language.}
+
+You can download R from: [https://cran.r-project.org/](https://cran.r-project.org/)
+
+### RStudio
+
+\keyword{RStudio} is the \accenttext{integrated development environment (IDE).}
+
+You can download RStudio from: [https://www.rstudio.com/](https://www.rstudio.com/)
+
+### RStudio Cloud
+
+\keyword{RStudio Cloud} lets you use RStudio \highlight{without a local installation}
+
+You can use RStudio Cloud by registering here: [https://rstudio.cloud](https://rstudio.cloud)
+
+## Exercises
+
+### Exercise A: Setting up a Working Environment
+
+\begin{enumerate}
+\tightlist
+\item Open \keyword{RStudio} and navigate to your desired working folder
+
+\vspace{0.3em}
+
+\item Create a new folder called \accenttext{r\_course}
+
+\vspace{0.3em}
+
+\item Set it as your \keyword{working directory}
+
+\vspace{0.3em}
+
+\item Create subfolders: \highlight{data} and \highlight{code}
+
+\vspace{0.3em}
+
+\item Create a new \important{R Project} in the \texttt{r\_course} folder
+\end{enumerate}
+\normalsize
+
+### Exercise B: R Scripts
+
+1. In the R console, type:
+
+```{r, eval=FALSE}
+print("Hello world")
+```
+
+2. Create a new \keyword{R script}: `File > New File > R Script`
+
+3. Type the same code in the script and \accenttext{run it}
+
+\normalsize
+
+# Part II: First Steps and Basic Concepts {.section}
+
+## First Steps in R
+
+### Variables and Vectors
+
+```{r}
+a <- 2  
+a       
+```
+\normalsize
+
+### Working with Vectors
+
+R easily allows to work with \keyword{vectors} of data!
+
+```{r}
+# Instantiate an integer vector 'a'
+a <- c(10, 22, 33, 22, 40)
+# Give names to the vector's elements
+names(a) <- c("Andy", "Betty", "Claire", 
+              "Daniel", "Eva")
+a  # Display the vector
+```
+\normalsize
+
+### Indexing
+
+We can access \keyword{single} (or \accenttext{multiple}) elements of a vector:
+
+```{r}
+a[3]     # Access the 3rd element
+a[3:5]   # Access the 3rd to 5th elements
+a["Claire"]  # Access by name
+```
+\normalsize
+
+### Inspecting variables
+
+```{r}
+class(a)  # Display the class
+
+str(a)    # Display the structure
+```
+\normalsize
+
+### Math Operators
+
+\keyword{Basic operators:}
+
+- $+$ : `+`
+- $-$ : `-`  
+- $\times$ : `*`
+- $\div$ : `/`
+
+\accenttext{More operators:}
+
+- $a^n$ : `a^n`
+- $\sqrt{a}$ : `sqrt(a)`
+- $\ln a$ : `log(a)`
+- $e^n$ : `exp(n)`
+
+## Basic Programming Concepts
+
+### Loops
+
+- \keyword{Repeatedly execute} a sequence of commands
+
+\vspace{0.3em}
+
+- For a \accenttext{known} or \accenttext{unknown} number of iterations
+  - \highlight{for-loop}: number of iterations typically known
+  - \highlight{while-loop}: iterate until a condition is met
+
+### for-loops in R
+
+```{r}
+n_iter <- 5  # Define number of iterations
+# Specify the loop
+for (i in 1:n_iter) {
+    print(i)  # Print the number 'i'
+}
+```
+\normalsize
+
+### for-loops: Summing numbers
+
+```{r}
+numbers <- c(72, 42, 150, 13, 36, 19)
+total_sum <- 0  # Initialize sum
+
+# Specify the loop
+for (n in numbers) {
+    total_sum <- total_sum + n
+}
+total_sum
+```
+\normalsize
+
+### Nested for-loops
+
+```{r, eval=FALSE}
+n_iter_inner <- 100
+n_iter_outer <- 500
+
+# Start outer loop
+for (i in 1:n_iter_outer) {
+    # Code for outer loop
+    
+    # Start inner loop
+    for (j in 1:n_iter_inner) {
+        # Code for inner loop
+    }
+}
+```
+\normalsize
+
+How many iterations does this combination amount to?
+
+### while-loops in R
+
+```{r}
+# Instantiate starting value
+total <- 0
+
+# Loop while the condition is TRUE
+while (total <= 10) {
+    total <- total + 3.14
+}
+total
+```
+\normalsize
+
+### Booleans and Logical Statements
+
+\footnotesize
+```{r}
+2 + 2 == 4  # Is 2+2 equal to 4?
+3 + 3 == 7  # Is 3+3 equal to 7?
+4 != 7      # Is 4 not equal to 7?
+```
+\normalsize
+
+### Control Flow with Booleans
+
+\footnotesize
+```{r}
+condition <- TRUE
+
+if (condition) {
+    print("The condition is true!")
+} else {
+    print("The condition is false!")
+}
+```
+\normalsize
+
+### R Functions
+
+- Functions take \keyword{parameter values} as input, process these values, and \accenttext{return} results
+
+\vspace{0.3em}
+
+- Many functions are \highlight{provided with R}
+
+\vspace{0.3em}
+
+- Additional functions via \important{packages}
+
+\footnotesize
+```{r}
+numbers <- c(13, 25, 39, 881)
+mean(numbers)    # Compute the mean
+sd(numbers)      # Standard deviation
+median(numbers)  # Median
+```
+\normalsize
+
+### Creating Custom Functions
+
+\footnotesize
+```{r}
+# Define custom mean function
+my_mean <- function(x) {
+    x_bar <- sum(x) / length(x)
+    return(x_bar)
+}
+
+# Test the function
+my_mean(numbers)
+mean(numbers)  # Compare with built-in
+```
+\normalsize
+
+## Data Structures and Indices
+
+### Vectors and Lists
+
+\footnotesize
+```{r}
+# Integer vector
+integer_vector <- 9:20
+integer_vector[2]    # Second element
+integer_vector[2:5]  # Second to fifth
+
+# String vector
+string_vector <- c("a", "b", "c")
+string_vector[-3]    # All except third
+```
+\normalsize
+
+### Lists
+
+Lists can contain \keyword{different types} of elements:
+
+\footnotesize
+```{r}
+# Create a list
+my_list <- list(
+    numbers = integer_vector,
+    letters = string_vector,
+    condition = TRUE
+)
+str(my_list)
+```
+\normalsize
+
+### Accessing List Elements
+
+\footnotesize
+```{r}
+# Access by name
+my_list$numbers[1:3]
+my_list[["letters"]]
+
+# Access by index
+my_list[[1]][1:3]
+```
+\normalsize
+
+### Matrices
+
+\footnotesize
+```{r}
+# Create a matrix
+my_matrix <- matrix(integer_vector, nrow = 4)
+my_matrix
+
+my_matrix[2,]      # Second row
+my_matrix[, 1:2]   # First two columns
+```
+\normalsize
+
+### Data Frames
+
+\footnotesize
+```{r}
+# Create a dataframe
+my_df <- data.frame(
+    Name = c("Alice", "Betty", "Claire"),
+    Age = c(20, 30, 45)
+)
+
+my_df
+my_df$Age         # Access column
+my_df[2, ]        # Second row
+```
+\normalsize
+
+## Exercises
+
+### Exercise A: Write a Sum Function
+
+Write a function that takes a \keyword{numeric vector} as input and returns the \accenttext{sum} of the vector's elements.
+
+```{r, eval=FALSE}
+my_sum <- function(x) {
+    # Your code here
+}
+```
+
+Test by comparing with built-in `sum()` function.
+
+### Exercise B: Robustness and Warnings
+
+Test your `my_sum()` function with:
+
+```{r, eval=FALSE}
+numbers2 <- c("1", "2", "3")
+```
+
+Add \keyword{error checking} to make the function robust.
+
+### Exercise C: Standard Deviation Function
+
+Implement a function to compute the \accenttext{standard deviation}:
+
+$$\text{SD} = \sqrt{\frac{1}{N-1}\sum_{i=1}^N (x_i - \bar{x})^2}$$
+
+### Exercise D: Standard Error Function
+
+Building on Exercise C, implement:
+
+$$\text{SE}_{\bar{x}} = \frac{\text{SD}}{\sqrt{N}}$$
+
+### Exercise E: T-test
+
+Implement a \keyword{one-sample t-test} function:
+
+$$t = \frac{\bar{x} - \mu_0}{\text{SE}_{\bar{x}}}$$
+
+### Exercise F: Fibonacci Sequence
+
+Generate the first 30 \accenttext{Fibonacci numbers} where:
+
+- $F_0 = 0$, $F_1 = 1$
+- $F_n = F_{n-1} + F_{n-2}$ for $n > 1$
+
+### Exercise G: Multiples of 3 and 5 (*)
+
+Write a function that computes the sum of all \keyword{multiples of 3 or 5} up to a number $N$.
+
+\accenttext{Hint:} Multiples of both 3 and 5 should only be added once!
+
+### Exercise H: Prime numbers (*)
+
+Write a function that computes the sum of all \highlight{prime numbers} up to a number $N$.
+
+# Part III: Working with Data {.section}
+
+## Loading/Importing Data
+
+### Loading built-in R data sets
+
+\footnotesize
+```{r}
+# Load built-in dataset
+data(swiss)
+
+# Check if loaded
+class(swiss)
+```
+\normalsize
+
+The `data()` function loads \keyword{built-in R datasets} into your environment.
+
+### Inspect the data structure
+
+\footnotesize
+```{r}
+# Structure of the swiss dataset
+str(swiss)
+```
+\normalsize
+
+### First few rows of the data
+
+\footnotesize
+```{r}
+head(swiss, 4)
+```
+\normalsize
+
+### Comma Separated Values (CSV)
+
+Example of \keyword{CSV format}:
+
+\footnotesize
+```
+"","Fertility","Agriculture","Examination",...
+"Courtelary",80.2,17,15,...
+"Delemont",83.1,45.1,6,...
+```
+\normalsize
+
+### Importing data from different sources
+
+\footnotesize
+```{r, eval=FALSE}
+# CSV files
+swiss_csv <- read.csv("./data/swiss.csv")
+
+# Excel files (requires readxl)
+library(readxl)
+swiss_excel <- read_excel("./data/swiss.xlsx")
+
+# SPSS files (requires haven)
+library(haven)
+swiss_spss <- read_spss("./data/swiss.sav")
+```
+\normalsize
+
+## Introduction to the Tidyverse
+
+### What is the Tidyverse?
+
+To install and load:
+
+```{r, eval=FALSE}
+install.packages("tidyverse")
+library(tidyverse)
+```
+
+### The Pipe Operator `|>`
+
+Transform nested functions into \keyword{readable pipelines}:
+
+```{r, size='footnotesize'}
+# Traditional approach
+head(select(swiss, Fertility, Education), 3)
+
+# With pipe operator
+swiss |> 
+  select(Fertility, Education) |> 
+  head(3)
+```
+\normalsize
+
+### Select columns with `select()`
+
+\footnotesize
+```{r}
+# Select specific columns
+swiss |> 
+  select(Fertility, Education, Catholic) |>
+  head(3)
+```
+\normalsize
+
+### Select columns - Advanced patterns
+
+\footnotesize
+```{r}
+# Select by pattern
+swiss |> 
+  select(starts_with("E"), contains("Mort")) |>
+  head(3)
+```
+\normalsize
+
+### Filter rows with `filter()`
+
+\footnotesize
+```{r}
+# Keep rows meeting conditions
+swiss |> 
+  filter(Education > 20) |>
+  select(Fertility, Education, Catholic) |>
+  head()
+```
+\normalsize
+
+### Create new variables with `mutate()`
+
+\footnotesize
+```{r}
+swiss |> 
+  mutate(
+    High_Education = Education > 15,
+    Fert_per_100 = Fertility / 100
+  ) |>
+  select(Education, High_Education, 
+         Fertility, Fert_per_100) |>
+  head(3)
+```
+\normalsize
+
+### Arrange rows with `arrange()`
+
+\footnotesize
+```{r}
+swiss |> 
+  arrange(desc(Education)) |>
+  select(Education, Examination) |>
+  head(4)
+```
+\normalsize
+
+### Summarize data with `summarize()`
+
+\footnotesize
+```{r}
+swiss |> 
+  summarize(
+    mean_edu = mean(Education),
+    sd_edu = sd(Education),
+    median_fert = median(Fertility),
+    n = n()
+  )
+```
+\normalsize
+
+### Group operations with `group_by()`
+
+\footnotesize
+```{r}
+# Add Religion variable
+swiss <- swiss |>
+  mutate(Religion = ifelse(Catholic > 50, 
+                          'Catholic', 
+                          'Protestant'))
+
+# Group and summarize
+swiss |> 
+  group_by(Religion) |>
+  summarize(
+    mean_education = mean(Education),
+    mean_fertility = mean(Fertility),
+    count = n()
+  )
+```
+\normalsize
+
+### Combining multiple operations
+
+\footnotesize
+```{r}
+swiss |> 
+  filter(Agriculture < 50) |>
+  group_by(Religion) |>
+  summarize(
+    avg_exam = mean(Examination),
+    n = n(),
+    .groups = "drop"
+  ) |>
+  arrange(desc(avg_exam))
+```
+\normalsize
+
+### Reshape data: Wide to Long
+
+\footnotesize
+```{r}
+# Original wide format
+swiss_subset <- swiss |> 
+  slice(1:2) |>
+  select(Fertility, Agriculture)
+
+swiss_subset
+```
+\normalsize
+
+### Reshape data: `pivot_longer()`
+
+\footnotesize
+```{r}
+# Convert to long format
+swiss_subset |>
+  pivot_longer(
+    cols = everything(),
+    names_to = "Metric",
+    values_to = "Value"
+  )
+```
+\normalsize
+
+### Join data frames
+
+\footnotesize
+```{r}
+# Sample data
+df1 <- data.frame(
+  Province = c("A", "B"),
+  Population = c(5000, 6000)
+)
+
+df2 <- data.frame(
+  Province = c("A", "B", "C"),
+  Language = c("FR", "FR", "DE")
+)
+
+# Left join keeps all rows from df1
+left_join(df1, df2, by = "Province")
+```
+\normalsize
+
+### Working with dates using lubridate
+
+\footnotesize
+```{r}
+library(lubridate)
+
+# Create and parse dates
+dates <- c("2023-09-08", "2023-09-15")
+parsed_dates <- ymd(dates)
+
+# Extract components
+data.frame(
+  date = parsed_dates,
+  year = year(parsed_dates),
+  month = month(parsed_dates),
+  weekday = wday(parsed_dates, label = TRUE)
+)
+```
+\normalsize
+
+### Advanced tidyverse: map functions
+
+\footnotesize
+```{r}
+# Apply a function to multiple columns
+swiss |>
+  select(Fertility, Agriculture, Education) |>
+  map_dbl(~ mean(.x)) |>
+  round(2)
+```
+\normalsize
+
+### String manipulation with stringr
+
+\footnotesize
+```{r}
+library(stringr)
+
+# Example text
+provinces <- c("Courtelary", "Delemont", "Franches-Mnt")
+
+# String operations
+data.frame(
+  original = provinces,
+  lower = str_to_lower(provinces),
+  length = str_length(provinces),
+  contains_e = str_detect(provinces, "e")
+)
+```
+\normalsize
+
+## Visualization with R (ggplot2)
+
+### Grammar of Graphics - Layers
+
+\center
+\includegraphics[width=.7\textwidth]{img/grammar_of_graphics.png}
+
+### ggplot2 basics
+
+\footnotesize
+```{r, eval=FALSE}
+# Basic structure
+ggplot(data = <DATA>, 
+       mapping = aes(x = <X>, y = <Y>)) +
+  <GEOM_FUNCTION>() +
+  <OPTIONAL_LAYERS>
+```
+\normalsize
+
+### Prepare the data
+
+\footnotesize
+```{r}
+# Add Religion indicator
+swiss$Religion <- factor(
+  ifelse(swiss$Catholic > 50, 
+         'Catholic', 'Protestant')
+)
+
+# Check the data
+table(swiss$Religion)
+```
+\normalsize
+
+### Building a plot: Data + Aesthetics
+
+\footnotesize
+```{r data-aes, fig.height=2}
+ggplot(data = swiss, 
+       aes(x = Education, y = Examination))
+```
+\normalsize
+
+### Adding Geometries
+
+\footnotesize
+```{r geom, fig.height=2}
+ggplot(data = swiss, 
+       aes(x = Education, y = Examination)) + 
+  geom_point(size = 3, alpha = 0.7, color = "#0066CC")
+```
+
+### Using Facets
+
+\SetCodeSize{\footnotesize}
+```{r facet, fig.height=2}
+ggplot(data = swiss, 
+       aes(x = Education, y = Examination)) + 
+  geom_point(size = 3, alpha = 0.7, aes(color = Religion)) +
+  scale_color_modern() +
+  facet_wrap(~Religion)
+```
+
+### Adding Statistics with loess
+
+\footnotesize
+```{r stat-loess, fig.height=2}
+ggplot(data = swiss, 
+       aes(x = Education, y = Examination)) + 
+  geom_point() +
+  geom_smooth(method = 'loess') +
+  facet_wrap(~Religion)
+```
+\normalsize
+
+### Adding Statistics with lm
+
+\footnotesize
+```{r stat-lm, fig.height=2}
+ggplot(data = swiss, 
+       aes(x = Education, y = Examination)) + 
+  geom_point() +
+  geom_smooth(method = 'lm', se = FALSE) +
+  facet_wrap(~Religion)
+```
+\normalsize
+
+### Multiple Aesthetics
+
+\footnotesize
+```{r multi-aes, fig.height=2}
+ggplot(data = swiss, 
+       aes(x = Education, y = Examination)) + 
+  geom_point(aes(color = Agriculture), size = 2) +
+  geom_smooth(method = 'lm', se = FALSE) +
+  facet_wrap(~Religion) +
+  scale_color_gradient(low = "blue", high = "red") +
+  theme(legend.position = "right")
+```
+\normalsize
+
+### Change coordinates
+
+\footnotesize
+```{r coord-flip, fig.height=2}
+ggplot(data = swiss, 
+       aes(x = Education, y = Examination)) + 
+  geom_point(aes(color = Agriculture)) +
+  geom_smooth(method = 'lm', se = FALSE) +
+  facet_wrap(~Religion) + 
+  coord_flip()
+```
+\normalsize
+
+### Customizing Themes
+
+\footnotesize
+```{r theme-custom, fig.height=2}
+ggplot(data = swiss, 
+       aes(x = Education, y = Examination)) + 
+  geom_point(aes(color = Agriculture)) +
+  geom_smooth(method = 'lm', se = FALSE) +
+  facet_wrap(~Religion) + 
+  theme_minimal() +
+  theme(legend.position = "bottom")
+```
+\normalsize
+
+### Pre-built Themes
+
+\footnotesize
+```{r theme-dark, fig.height=2}
+ggplot(data = swiss, 
+       aes(x = Education, y = Examination)) + 
+  geom_point(aes(color = Agriculture)) +
+  geom_smooth(method = 'lm', se = FALSE) +
+  facet_wrap(~Religion) + 
+  theme_dark()
+```
+\normalsize
+
+### Save plots
+
+\footnotesize
+```{r, eval=FALSE}
+# Save the last plot
+ggsave("my_plot.png", 
+       width = 8, height = 5, 
+       dpi = 300)
+
+# Save a specific plot
+p <- ggplot(swiss, aes(Education, Examination)) + 
+  geom_point()
+
+ggsave("scatter.pdf", plot = p,
+       width = 6, height = 4)
+```
+\normalsize
+
+## Basic Statistics with R
+
+### Descriptive Statistics
+
+\footnotesize
+```{r}
+# Create sample data
+x <- c(10, 22, 33, 22, 40)
+
+# Basic statistics
+c(mean = mean(x),
+  median = median(x),
+  sd = sd(x),
+  min = min(x),
+  max = max(x))
+```
+\normalsize
+
+### T-test Example
+
+\footnotesize
+```{r}
+# Generate sample data
+set.seed(123)
+sample <- rnorm(30, mean = 10, sd = 2)
+
+# One-sample t-test
+t_result <- t.test(sample, mu = 10)
+t_result$p.value
+t_result$conf.int
+```
+\normalsize
+
+### Linear Regression - Setup
+
+\footnotesize
+```{r}
+# Define the model formula
+model1 <- Examination ~ Education
+
+# Fit the model
+fit1 <- lm(model1, data = swiss)
+
+# View coefficients
+coef(fit1)
+```
+\normalsize
+
+### Simple Linear Regression - Results
+
+\tiny
+```{r}
+summary(fit1)
+```
+\normalsize
+
+### Multiple Linear Regression
+
+\footnotesize
+```{r}
+# Fit model with multiple predictors
+fit2 <- lm(Examination ~ Education + Catholic + 
+           Agriculture, data = swiss)
+
+# Model fit statistics
+c(R2 = summary(fit2)$r.squared,
+  Adj_R2 = summary(fit2)$adj.r.squared,
+  RMSE = sigma(fit2))
+```
+\normalsize
+
+### Regression Coefficients Table
+
+\footnotesize
+```{r}
+# Extract coefficient information
+coef_summary <- summary(fit2)$coefficients
+round(coef_summary, 3)
+```
+\normalsize
+
+### Other Econometric Models
+
+\footnotesize
+```{r, eval=FALSE}
+# Binary outcomes - Logit
+glm(y ~ x1 + x2, 
+    family = binomial(link = "logit"))
+
+# Binary outcomes - Probit  
+glm(y ~ x1 + x2, 
+    family = binomial(link = "probit"))
+
+# Count data - Poisson
+glm(y ~ x1 + x2, 
+    family = poisson())
+
+# Panel data - Fixed effects (requires plm)
+library(plm)
+plm(y ~ x1 + x2, 
+    data = panel_data,
+    model = "within")
+```
+\normalsize
+
+### Print Regression Results - Console
+
+\tiny
+```{r, results='asis'}
+# Basic regression table
+stargazer(fit1, fit2, 
+          type = "text",
+          digits = 2,
+          star.cutoffs = c(0.05, 0.01, 0.001),
+          omit.stat = c("ser", "f"),
+          column.sep.width = "1pt")
+```
+\normalsize
+
+### Export Results to LaTeX
+
+\footnotesize
+```{r, eval=FALSE}
+# For LaTeX documents
+stargazer(fit1, fit2,
+          type = "latex",
+          title = "Regression Results",
+          label = "tab:reg",
+          digits = 2,
+          header = FALSE,
+          font.size = "small",
+          column.sep.width = "1pt",
+          single.row = TRUE)
+```
+\normalsize
+
+### Save Regression Output
+
+\footnotesize
+```{r, eval=FALSE}
+# Save as LaTeX file
+stargazer(fit1, fit2,
+          type = "latex",
+          out = "./results/regression_table.tex",
+          title = "Swiss Data Analysis",
+          covariate.labels = c("Education (years)",
+                              "Catholic (%)",
+                              "Agriculture (%)"))
+
+# Save as HTML
+stargazer(fit1, fit2,
+          type = "html",
+          out = "./results/regression_table.html")
+```
+\normalsize
+
+## Final Remarks
+
+### Best Practices for R Programming
+
+\small
+1. \keyword{Organization}
+   - Start scripts with `library()` calls
+   - Use meaningful variable names
+   - Comment your code with `#`
+
+\vspace{0.3em}
+
+2. \accenttext{Efficiency}
+   - Use functions to avoid repetition
+   - Vectorize operations when possible
+   - Use the tidyverse for data manipulation
+
+\vspace{0.3em}
+
+3. \highlight{Reproducibility}
+   - Set seeds for random operations
+   - Use relative paths (`./data/`)
+   - Document package versions
+\normalsize
+
+### Resources for Learning R
+
+:::::: {.columns}
+::: {.column width="50%"}
+\textcolor{mLightBlue}{\textbf{Online Resources:}}
+\begin{itemize}
+\item \keyword{Stack Overflow}
+
+\vspace{0.3em}
+
+\item \accenttext{R for Data Science} book
+
+\vspace{0.3em}
+
+\item \highlight{RStudio cheatsheets}
+
+\vspace{0.3em}
+
+\item \important{CRAN documentation}
+\end{itemize}
+:::
+
+::: {.column width="50%"}
+\textcolor{mAccent}{\textbf{AI Assistance:}}
+\begin{itemize}
+\item \keyword{ChatGPT}
+
+\vspace{0.3em}
+
+\item \accenttext{GitHub Copilot}
+
+\vspace{0.3em}
+
+\item \highlight{Google Bard}
+\end{itemize}
+:::
+::::::
+
+### Upcoming Courses
+
+\keyword{Next Week}
+
+\accenttext{R Programming Course}  
+Instructor: Erik Senn  
+Dates: September 8-11, 2025  
+Time: 9:00-12:00 and 13:00-17:00  
+Location: Rosenbergstrasse 30, Room 61-152
+
+### Thank You!
+
+\begin{center}
+\Large
+\textcolor{mLightBlue}{Thanks for joining our R workshop!}
+
+\vspace{1em}
+
+
+
+\vspace{1em}
+\textcolor{mAccent}{\Large Happy Coding!}
+\end{center}
+
+### Survey
+
+\begin{center}
+\Large
+\textcolor{mLightBlue}{Please take a moment to provide feedback on today's workshop.}
+
+\vspace{1em}
+
+\keyword{Your input helps us improve future courses!}
+\end{center}

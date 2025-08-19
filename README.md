@@ -7,11 +7,8 @@ This course introduces students to the fundamental practices of programming with
 [Download ZIP file with the necessary course data and files.](https://github.com/ErikSenn/intro_to_r_2025/archive/refs/heads/main.zip)
 
 
-
 ## Course Slides
-- [Part I: Background / Tools](https://www.jldc.ch/slides/2023_intro_to_r_1.html)
-- [Part II: First Steps and Basic Concepts](https://www.jldc.ch/slides/2023_intro_to_r_2.html)
-- [Part III: Working with Data](https://www.jldc.ch/slides/2023_intro_to_r_3.html)
+- coming soon
 
 ## Course Structure
 
@@ -48,7 +45,7 @@ This course introduces students to the fundamental practices of programming with
 There is no examination.
 
 ## Lecturers
-[Jeremia Stalder](https://github.com/JeremiaStalder) and [Erik-Jan Senn](https://eriksenn.github.io/)
+[Jeremia Stalder](https://jeremiastalder.com) and [Erik-Jan Senn](https://eriksenn.github.io/)
 
 ## Credits
 Credit for a previous version of the course and slides go to [Prof. Ph.D. Ulrich Matter](https://umatter.github.io/) and [Jonathan Chassot](https://github.com/jldc).
