@@ -40,3 +40,9 @@ vignettes/*.pdf
 table.tex
 image.png
 intro-to-r-2023.Rproj
+
+### macOS ###
+# General
+.DS_Store
+.AppleDouble
+.LSOverride
