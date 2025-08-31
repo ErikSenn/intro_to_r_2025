@@ -19,6 +19,7 @@
 
 # RStudio files
 .Rproj.user/
+*.Rproj
 
 # produced vignettes
 vignettes/*.html
@@ -43,6 +44,6 @@ intro-to-r-2023.Rproj
 
 ### macOS ###
 # General
-.DS_Store
-.AppleDouble
-.LSOverride
+*.DS_Store
+*.AppleDouble
+*.LSOverride
