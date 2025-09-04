@@ -248,6 +248,7 @@ Exercises
   \item \href{https://github.com/ErikSenn/intro_to_r_2025/}{\textcolor{mLightBlue}{GitHub Repository}}
   \item Course slides available online
   \end{itemize}
+  \item   \keyword{Download and install} \highlight{R and R-studio} if you have not done so yet ( \url{https://cran.r-project.org/}, \url{https://posit.co/download/rstudio-desktop/})  
 \end{enumerate}
 
 ## Why learn to program (now)?
