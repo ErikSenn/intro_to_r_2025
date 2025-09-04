@@ -277,6 +277,9 @@ Working with Data
   \only<7>{\includegraphics[width=.9\textwidth]{img/Slide1.jpg}}
 \end{overprint}
 
+## Why learn to program if AI assis
+
+
 ## Why R?
 
 ### A data language
@@ -328,17 +331,141 @@ Working with Data
 
 You can download R from: [https://cran.r-project.org/](https://cran.r-project.org/)
 
-### RStudio
+### RStudio Desktop
 
 \keyword{RStudio} is the \accenttext{integrated development environment (IDE).}
 
-You can download RStudio from: [https://www.rstudio.com/](https://www.rstudio.com/)
+You can download RStudio Desktop from: [https://posit.co/download/rstudio-desktop/](https://posit.co/download/rstudio-desktop/)
 
 ### RStudio Cloud
 
 \keyword{RStudio Cloud} lets you use RStudio \highlight{without a local installation}
 
-You can use RStudio Cloud by registering here: [https://rstudio.cloud](https://rstudio.cloud)
+You can use RStudio (Posit) Cloud by registering here: [https://posit.cloud/](https://posit.cloud/)
+
+
+## An RStudio Tour
+
+<!--
+
+\frametitle{RStudio}
+
+\vspace{-15pt}
+\begin{itemize}
+	\item the most popular IDE to work in R
+	\item IDE (integrated development environment) = software application for software development integrating several developer tools into one user interface
+	\item opening R Studio opens an R Session with:
+	\begin{itemize}
+		\item \textbf{Console Window} = here the commands are typed and results are returned
+		\item \textbf{Environment / History} = shows all objects created in the current R session (Environment tab) and all commands used (History tab)
+		\item \textbf{Files / Plots / Packages / Help} = primarily used to see the files system (Files tab), created plots (Plots tab), install or check available packages (Packages tab) and documentation (Help tab) 
+	\end{itemize}
+\end{itemize}
+}
+
+\frame{
+	\begin{center}
+		\includegraphics[width=\textwidth]{RstudioGUI.png}
+	\end{center}
+
+%	\textbf{Task:} Type 2+2 into the console and press Enter.
+
+}
+
+\Section{R Scripts}
+
+\frame{
+	
+	\frametitle{R Scripts}
+	\vspace{-15pt}
+	\begin{itemize}
+		\item R code can be written directly into the R Console or it can be typed as a simple text file (R Script) that is later run in the console
+		\item advantage of R scripts: code is saved in a file that can be re-run, augmented and shared at any time.
+	\end{itemize}
+	
+}
+
+
+
+
+\frame{
+	
+	\begin{center}
+		\textbf{Task 1:}
+		\vspace{10pt}
+		\begin{itemize}
+			\centering
+			\item Click on \textbf{File - New File - R Script} \\
+			\item Save the new R script (File - Save or Ctrl + S or CMD + S on MacOS) into the folder ``01-Basics'' under a name ``01-Basics.R''
+		\end{itemize}
+	\end{center}
+}
+
+\frame{
+	
+	\begin{center}
+		\includegraphics[width=\textwidth]{RscriptWin.png}
+	\end{center}
+	
+}
+
+\frame{
+	
+	\frametitle{Writing and Running Scripts}
+	
+	\vspace{-15pt}
+	\begin{itemize}
+		\item any text after \# is interpreted as a comment
+		\item any other text is interpreted as active code
+		\item to run the whole script press Ctrl + Shift + Enter (CMD + Shift + Enter on MacOS)
+		\item to run only a part of the script, select all lines that should run and press Ctrl + Enter (CMD + Enter on MacOS)
+	\end{itemize}
+	
+}
+
+\Section{Working Directory}
+
+\frame{
+	
+	\frametitle{Working Directory}
+	
+	\vspace{-15pt}
+	\begin{itemize}
+		\item R will save your reults into the current working directory
+		\item to find out what the current working directory is, run {\color{blue} \texttt{getwd()}} in the console
+		\item changing the working directory can be done via
+		\begin{itemize}
+			\item Session > Set Working Directory > Choose Directory, click to the new directory and confirm by clicking on Open
+			\item or use function {\color{blue} \texttt{setwd()}} with the path leading to the new directory
+			\item[] E.g. {\color{blue} \texttt{setwd(``c:/user/R/Tutorial1'')}}
+		\end{itemize}
+	\end{itemize}
+	
+}
+
+\Section{R Help}
+
+\frame{
+	\frametitle{R help}
+	
+	\vspace{-15pt}
+	\begin{itemize}
+		\item if the name of the function is known, type \texttt{?} and the name of the function 
+		\item[] E.g. {\color{blue} \texttt{?getwd}}
+		\item this will open the help for the function
+		\item if function is in a package, clicking in the Packages menu on the package and the function leads to its documentation
+		\item otherwise, Google is a good friend
+	\end{itemize}
+	
+}
+
+## R-projects / relation to paths/working directory
+
+## Possibly: reference to useful features - git, data import visual interface, git, automatic AI-assistance.
+
+
+-->
+
 
 ## Exercises
 
@@ -499,6 +626,7 @@ for (i in 1:n_iter_outer) {
 
 How many iterations does this combination amount to?
 
+<!--
 ### while-loops in R
 
 ```{r}
@@ -512,6 +640,7 @@ while (total <= 10) {
 total
 ```
 \normalsize
+-->
 
 ### Booleans and Logical Statements
 
@@ -1385,6 +1514,10 @@ stargazer(fit1, fit2,
 :::
 ::::::
 
+### An example on AI Assistance for learning coding
+
+
+
 ### Upcoming Courses
 
 \keyword{Next Week}
@@ -1394,6 +1527,7 @@ Instructor: Erik Senn
 Dates: September 8-11, 2025  
 Time: 9:00-12:00 and 13:00-17:00  
 Location: Rosenbergstrasse 30, Room 61-152
+Contents: Similar contents as today in slower pace. Automated reports using R-markdown on last day.
 
 ### Thank You!
 
