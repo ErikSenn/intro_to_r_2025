@@ -197,7 +197,7 @@ Introduction, Background, Tools, First steps with R
 \vspace{0.5em}
 
 \textcolor{mLightBlue}{10:00 - 10:15} \\
-Break, support with installations
+Break, Support with Installations
 \vspace{0.5em}
 
 \textcolor{mLightBlue}{10:15 - 11:00} \\
@@ -252,7 +252,7 @@ Exercises
 
 ## Why learn to program (now)?
 
-### Background: Technological change
+### Background: technological change
 
 :::::: {.columns}
 ::: {.column width="60%"}
@@ -275,7 +275,7 @@ Exercises
 :::
 ::::::
 
-### Perspective: Data Science and Economics
+### Perspective: data science and economics
 
 \begin{overprint}
   \only<1>{\includegraphics[width=.9\textwidth]{img/Slide7.jpg}}
@@ -287,10 +287,10 @@ Exercises
   \only<7>{\includegraphics[width=.9\textwidth]{img/Slide1.jpg}}
 \end{overprint}
 
-## Why learn to program if AI assis
+### Programming in the age of AI-assistance
 
 
-## Why R?
+### Why R?
 
 ### A data language
 
@@ -333,7 +333,7 @@ Exercises
 ::::::
 
 
-## The Tools
+## The Tools for Today
 
 ### R
 
@@ -341,20 +341,20 @@ Exercises
 
 You can download R from: [https://cran.r-project.org/](https://cran.r-project.org/)
 
-### RStudio Desktop
+### Rstudio desktop
 
 \keyword{RStudio} is the \accenttext{integrated development environment (IDE).}
 
 You can download RStudio Desktop from: [https://posit.co/download/rstudio-desktop/](https://posit.co/download/rstudio-desktop/)
 
-### RStudio Cloud
+### Rstudio cloud
 
 \keyword{RStudio Cloud} lets you use RStudio \highlight{without a local installation}
 
 You can use RStudio (Posit) Cloud by registering here: [https://posit.cloud/](https://posit.cloud/)
 
 
-## An RStudio Tour
+## An R-Studio Interface Tour
 
 <!--
 
@@ -471,7 +471,7 @@ You can use RStudio (Posit) Cloud by registering here: [https://posit.cloud/](ht
 
 ## R-projects / relation to paths/working directory
 
-## Possibly: reference to useful features - git, data import visual interface, git, automatic AI-assistance.
+## Possibly: reference to useful features - git, data import visual interface, git, automatic ai-assistance.
 
 
 -->
@@ -479,7 +479,7 @@ You can use RStudio (Posit) Cloud by registering here: [https://posit.cloud/](ht
 
 ## Exercises
 
-### Exercise A: Setting up a Working Environment
+### Exercise a: setting up a working environment
 
 \begin{enumerate}
 \tightlist
@@ -506,7 +506,7 @@ TODO Add screenshots of Rstudio and explain each part
 TODO Add quick intro to here package for clean project management
 TODO Add how to use copilot?
 
-### Exercise B: R Scripts
+### Exercise b: r scripts
 
 1. In the R console, type:
 
@@ -522,16 +522,16 @@ print("Hello world")
 
 # Part II: First Steps and Basic Concepts {.section}
 
-## First Steps in R
+## First steps in r
 
-### Variables and Vectors
+### Variables and vectors
 
 ```{r}
 a <- 2  
 a       
 ```
 
-### Working with Vectors
+### Working with vectors
 
 R easily allows to work with \keyword{vectors} of data!
 
@@ -562,7 +562,7 @@ class(a)  # Display the class
 str(a)    # Display the structure
 ```
 
-### Math Operators
+### Math operators
 
 \keyword{Basic operators:}
 
@@ -590,7 +590,7 @@ str(a)    # Display the structure
   - \highlight{for-loop}: number of iterations typically known
   - \highlight{while-loop}: iterate until a condition is met
 
-### for-loops in R
+### For-loops in r
 
 ```{r}
 n_iter <- 5  # Define number of iterations
@@ -600,7 +600,7 @@ for (i in 1:n_iter) {
 }
 ```
 
-### for-loops: Summing numbers
+### For-loops: summing numbers
 
 ```{r}
 numbers <- c(72, 42, 150, 13, 36, 19)
@@ -633,13 +633,13 @@ for (i in 1:n_iter_outer) {
 How many iterations does this combination amount to?
 
 <!--
-### while-loops in R
+### While-loops in r
 
 ```{r}
 # Instantiate starting value
 total <- 0
 
-# Loop while the condition is TRUE
+# Loop while the condition is true
 while (total <= 10) {
     total <- total + 3.14
 }
@@ -649,7 +649,7 @@ total
 -->
 
 
-### Booleans and Logical Statements
+### Booleans and logical statements
 
 ```{r}
 2 + 2 == 4  # Is 2+2 equal to 4?
@@ -657,7 +657,7 @@ total
 4 != 7      # Is 4 not equal to 7?
 ```
 
-### Control Flow with Booleans
+### Control flow with booleans
 
 ```{r}
 condition <- TRUE
@@ -669,7 +669,7 @@ if (condition) {
 }
 ```
 
-### R Functions
+### R functions
 
 - Functions take \keyword{parameter values} as input, process these values, and \accenttext{return} results
 
@@ -688,7 +688,7 @@ sd(numbers)      # Standard deviation
 median(numbers)  # Median
 ```
 
-### Creating Custom Functions
+### Creating custom functions
 
 ```{r}
 # Define custom mean function
@@ -704,7 +704,7 @@ mean(numbers)  # Compare with built-in
 
 ## Data Structures and Indices
 
-### Vectors and Lists
+### Vectors and lists
 
 ```{r}
 # Integer vector
@@ -731,7 +731,7 @@ my_list <- list(
 str(my_list)
 ```
 
-### Accessing List Elements
+### Accessing list elements
 
 ```{r}
 # Access by name
@@ -753,7 +753,7 @@ my_matrix[2,]      # Second row
 my_matrix[, 1:2]   # First two columns
 ```
 
-### Data Frames
+### Data frames
 
 ```{r}
 # Create a dataframe
@@ -769,7 +769,7 @@ my_df[2, ]        # Second row
 
 ## Exercises
 
-### Exercise A: Write a Sum Function
+### Exercise a: write a sum function
 
 Write a function that takes a \keyword{numeric vector} as input and returns the \accenttext{sum} of the vector's elements.
 
@@ -781,7 +781,7 @@ my_sum <- function(x) {
 
 Test by comparing with built-in `sum()` function.
 
-### Exercise B: Robustness and Warnings
+### Exercise b: robustness and warnings
 
 Test your `my_sum()` function with:
 
@@ -791,46 +791,46 @@ numbers2 <- c("1", "2", "3")
 
 Add \keyword{error checking} to make the function robust.
 
-### Exercise C: Standard Deviation Function
+### Exercise c: standard deviation function
 
 Implement a function to compute the \accenttext{standard deviation}:
 
 $$\text{SD} = \sqrt{\frac{1}{N-1}\sum_{i=1}^N (x_i - \bar{x})^2}$$
 
-### Exercise D: Standard Error Function
+### Exercise d: standard error function
 
 Building on Exercise C, implement:
 
 $$\text{SE}_{\bar{x}} = \frac{\text{SD}}{\sqrt{N}}$$
 
-### Exercise E: T-test
+### Exercise e: t-test
 
 Implement a \keyword{one-sample t-test} function:
 
 $$t = \frac{\bar{x} - \mu_0}{\text{SE}_{\bar{x}}}$$
 
-### Exercise F: Fibonacci Sequence
+### Exercise f: fibonacci sequence
 
 Generate the first 30 \accenttext{Fibonacci numbers} where:
 
 - $F_0 = 0$, $F_1 = 1$
 - $F_n = F_{n-1} + F_{n-2}$ for $n > 1$
 
-### Exercise G: Multiples of 3 and 5 (*)
+### Exercise g: multiples of 3 and 5 (*)
 
 Write a function that computes the sum of all \keyword{multiples of 3 or 5} up to a number $N$.
 
 \accenttext{Hint:} Multiples of both 3 and 5 should only be added once!
 
-### Exercise H: Prime numbers (*)
+### Exercise h: prime numbers (*)
 
 Write a function that computes the sum of all \highlight{prime numbers} up to a number $N$.
 
 # Part III: Working with Data {.section}
 
-## Loading/Importing Data
+## Loading/importing Data
 
-### Loading built-in R data sets
+### Loading built-in r data sets
 
 ```{r}
 # Load built-in dataset
@@ -857,7 +857,7 @@ str(swiss)
 head(swiss, 4)
 ```
 
-### Comma Separated Values (CSV)
+### Comma separated values (csv)
 
 Example of \keyword{CSV format}:
 
@@ -873,14 +873,14 @@ Example of \keyword{CSV format}:
 
 \footnotesize
 ```{r, eval=FALSE}
-# CSV files
+# Csv files
 swiss_csv <- read.csv("./data/swiss.csv")
 
 # Excel files (requires readxl)
 library(readxl)
 swiss_excel <- read_excel("./data/swiss.xlsx")
 
-# SPSS files (requires haven)
+# Spss files (requires haven)
 library(haven)
 swiss_spss <- read_spss("./data/swiss.sav")
 ```
@@ -888,7 +888,7 @@ swiss_spss <- read_spss("./data/swiss.sav")
 
 ## Introduction to the Tidyverse
 
-### What is the Tidyverse?
+### What is the tidyverse?
 
 \textit{"The tidyverse is an opinionated collection of R packages designed for data science. All packages share an underlying design philosophy, grammar, and data structures."}
 
@@ -902,7 +902,7 @@ install.packages("tidyverse") # Install once
 library(tidyverse) # Load in each session
 ```
 
-### The Pipe Operator `|>`
+### The pipe operator `|>`
 
 Transform nested functions into \keyword{readable pipelines}:
 
@@ -928,7 +928,7 @@ swiss |>
   head(3)
 ```
 
-### Select columns - Advanced patterns
+### Select columns - advanced patterns
 
 ```{r}
 # Select by pattern
@@ -1012,7 +1012,7 @@ swiss |>
 ```
 \normalsize
 
-### Reshape data: Wide to Long
+### Reshape data: wide to long
 
 \footnotesize
 ```{r}
@@ -1082,7 +1082,7 @@ data.frame(
 )
 ```
 
-### purrr: map functions 
+### Purrr: map functions
 
 ```{r}
 # Apply a function to multiple columns
@@ -1108,12 +1108,12 @@ tibble(
 
 ## Visualization with R (ggplot2)
 
-### Grammar of Graphics - Layers
+### Grammar of graphics - layers
 
 \center
 \includegraphics[width=.7\textwidth]{img/grammar_of_graphics.png}
 
-### ggplot2 basics
+### Ggplot2 basics
 
 ```{r, eval=FALSE}
 # Basic structure
@@ -1126,7 +1126,7 @@ ggplot(data = <DATA>,
 ### Prepare the data
 
 ```{r}
-# Add Religion indicator
+# Add religion indicator
 swiss <- swiss |> 
   mutate(Religion = ifelse(Catholic > 50, 
                            'Catholic', 'Protestant') |> factor())
@@ -1135,14 +1135,14 @@ swiss <- swiss |>
 table(swiss$Religion)
 ```
 
-### Building a plot: Data + Aesthetics
+### Building a plot: data + aesthetics
 
 ```{r data-aes, fig.height=2}
 ggplot(data = swiss, 
        aes(x = Education, y = Examination))
 ```
 
-### Adding Geometries
+### Adding geometries
 
 ```{r geom, fig.height=2}
 ggplot(data = swiss, 
@@ -1150,7 +1150,7 @@ ggplot(data = swiss,
   geom_point(size = 3, alpha = 0.7, color = "#0066CC")
 ```
 
-### Using Facets
+### Using facets
 
 \SetCodeSize{\footnotesize}
 ```{r facet, fig.height=2}
@@ -1161,7 +1161,7 @@ ggplot(data = swiss,
   facet_wrap(~Religion)
 ```
 
-### Adding Statistics with loess
+### Adding statistics with loess
 
 \SetCodeSize{\footnotesize}
 ```{r stat-loess, fig.height=2}
@@ -1172,7 +1172,7 @@ ggplot(data = swiss,
   facet_wrap(~Religion)
 ```
 
-### Adding Statistics with lm
+### Adding statistics with lm
 
 \SetCodeSize{\footnotesize}
 ```{r stat-lm, fig.height=2}
@@ -1183,7 +1183,7 @@ ggplot(data = swiss,
   facet_wrap(~Religion)
 ```
 
-### Multiple Aesthetics
+### Multiple aesthetics
 
 \SetCodeSize{\footnotesize}
 ```{r multi-aes, fig.height=1.75}
@@ -1207,7 +1207,7 @@ ggplot(data = swiss,
   coord_flip()
 ```
 
-### Customizing Themes
+### Customizing themes
 
 \SetCodeSize{\footnotesize}
 ```{r theme-custom, fig.height=1.75}
@@ -1219,7 +1219,7 @@ ggplot(data = swiss,
   theme_minimal()
 ```
 
-### Pre-built Themes
+### Pre-built themes
 
 \SetCodeSize{\footnotesize}
 ```{r theme-dark, fig.height=1.75}
@@ -1249,7 +1249,7 @@ ggsave("scatter.pdf", plot = p,
 
 ## Basic Statistics with R
 
-### Descriptive Statistics
+### Descriptive statistics
 
 \SetCodeSize{\footnotesize}
 ```{r}
@@ -1266,7 +1266,7 @@ tibble(
 )
 ```
 
-### T-test Example
+### T-test example
 
 \SetCodeSize{\footnotesize}
 ```{r}
@@ -1280,7 +1280,7 @@ t_result$p.value
 t_result$conf.int
 ```
 
-### Linear Regression - Setup
+### Linear regression - setup
 
 ```{r}
 # Define the model formula
@@ -1293,7 +1293,7 @@ fit1 <- lm(model1, data = swiss)
 coef(fit1) # Use 'summary(fit1)' for more details
 ```
 
-### Multiple Linear Regression
+### Multiple linear regression
 
 \footnotesize
 ```{r}
@@ -1309,7 +1309,7 @@ tibble(
 ```
 \normalsize
 
-### Regression Coefficients Table
+### Regression coefficients table
 
 \footnotesize
 ```{r}
@@ -1319,29 +1319,29 @@ round(coef_summary, 3)
 ```
 \normalsize
 
-### Other Econometric Models
+### Other econometric models
 
 \SetCodeSize{\footnotesize}
 ```{r, eval=FALSE}
-# Binary outcomes - Logit
+# Binary outcomes - logit
 glm(y ~ x1 + x2, 
     family = binomial(link = "logit"))
 
-# Binary outcomes - Probit  
+# Binary outcomes - probit
 glm(y ~ x1 + x2, 
     family = binomial(link = "probit"))
 
-# Count data - Poisson
+# Count data - poisson
 glm(y ~ x1 + x2, 
     family = poisson())
 
-# Panel data - Fixed effects
+# Panel data - fixed effects
 library(fixest) # install.packages("fixest")
 feols(y ~ x1 + x2 | x3, 
     data = panel_data)
 ```
 
-### Print Regression Results - Console
+### Print regression results - console
 
 \tiny
 ```{r, eval=FALSE}
@@ -1361,7 +1361,7 @@ modelsummary(models,
 ```
 \normalsize
 
-### Save Regression Output
+### Save regression output
 
 \footnotesize
 ```{r, eval=FALSE}
@@ -1380,9 +1380,9 @@ modelsummary(models, output = "markdown")
 ```
 \normalsize
 
-## Final Remarks
+# Final Remarks {.section}
 
-### Best Practices for R Programming
+### Best practices for r programming
 
 \small
 1. \keyword{Organization}
@@ -1402,10 +1402,10 @@ modelsummary(models, output = "markdown")
 3. \highlight{Reproducibility}
    - Set seeds for random operations
    - Use relative paths (`./data/`)
-   - Document package versions
+   - Document package versions (or with with projects / environments)
 \normalsize
 
-### Resources for Learning R
+### Resources for learning r
 
 :::::: {.columns}
 ::: {.column width="50%"}
@@ -1439,15 +1439,16 @@ modelsummary(models, output = "markdown")
 \vspace{0.3em}
 
 \item \highlight{Google Bard}
+
 \end{itemize}
 :::
 ::::::
 
-### An example on AI Assistance for learning coding
+### An example on ai assistance for learning coding
 
 
 
-### Upcoming Courses
+### Upcoming courses
 
 \keyword{Next Week}
 
@@ -1458,7 +1459,7 @@ Time: 9:00-12:00 and 13:00-17:00
 Location: Rosenbergstrasse 30, Room 61-152
 Contents: Similar contents as today in slower pace. Automated reports using R-markdown on last day.
 
-### Thank You!
+### Thank you!
 
 \begin{center}
 \Large
@@ -1472,13 +1473,17 @@ Contents: Similar contents as today in slower pace. Automated reports using R-ma
 \textcolor{mAccent}{\Large Happy Coding!}
 \end{center}
 
-### Survey
+### Survey - evaluation for introduction week
+
+
+<div style="text-align: center;">
+  ![](survey_qr.png){width=35%}
+</div>
 
 \begin{center}
-\Large
-\textcolor{mLightBlue}{Please take a moment to provide feedback on today's workshop.}
 
-\vspace{1em}
-
-\keyword{Your input helps us improve future courses!}
+\large
+\url{https://forms.office.com/e/Ki59zF84dY}\\
+\textcolor{mLightBlue}{Please take a moment to provide feedback on the introduction week. Your input helps us improve future courses!}\\
 \end{center}
+
