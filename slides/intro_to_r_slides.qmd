@@ -2,7 +2,7 @@
 title: |
   | \huge A Brief Introduction to
   | \huge Programming with R
-subtitle: "MEcon/MIQEF Introductory Week"
+subtitle: "MEcon & MiQE/F Introductory Week"
 author: "Erik Senn & Jeremia Stalder"
 date: "September 5, 2025"
 format:
@@ -18,7 +18,7 @@ format:
     fig-height: 3
     fig-align: center
     df-print: kable
-    fontsize: 10pt
+    fontsize: 12pt
     aspectratio: 169
     keep-tex: false
     latex-engine: xelatex
@@ -44,10 +44,10 @@ format:
 
         % Body text size
         \setbeamerfont{normal text}{size=\normalsize}
-        % All slide titles (##) as \huge
-        \setbeamerfont{frametitle}{size=\huge,series=\bfseries}
+        % All slide titles (##) as \large
+        \setbeamerfont{frametitle}{size=\large,series=\bfseries}
         \setbeamerfont{section title}{size=\huge,series=\bfseries}
-        \setbeamerfont{subsection title}{size=\huge,series=\bfseries}
+        \setbeamerfont{subsection title}{size=\large,series=\bfseries}
 
         % Beamer colors
         \setbeamercolor{normal text}{fg=mDarkBlue}
@@ -190,44 +190,55 @@ opts_chunk$set(
 \begin{columns}[T]
 \begin{column}{0.48\textwidth}
 \textbf{Morning Sessions}
+\vspace{0.5em}
 
 \textcolor{mLightBlue}{09:15 - 10:00} \\
-Introduction, Background, Tools
+Introduction, Background, Tools, First steps with R
+\vspace{0.5em}
 
 \textcolor{mLightBlue}{10:00 - 10:15} \\
 Break, support with installations
+\vspace{0.5em}
 
 \textcolor{mLightBlue}{10:15 - 11:00} \\
-Exercises, First steps with R
+Exercises, Basic Concepts
+\vspace{0.5em}
 
 \textcolor{mLightBlue}{11:00 - 11:15} \\
 Break, Q\&A
+\vspace{0.5em}
 
-\textcolor{mLightBlue}{11:15 - 12:00} \\
-First steps with R, Concepts
+\textcolor{mLightBlue}{11:15 - 11:45} \\
+Exercises, Basic Concepts
+\vspace{0.5em}
+
 \end{column}
 
 \begin{column}{0.48\textwidth}
 \textbf{Afternoon Sessions}
+\vspace{0.5em}
 
-\textcolor{mLightBlue}{12:00 - 13:15} \\
+\textcolor{mLightBlue}{11:45 - 13:15} \\
 Lunch (individually)
+\vspace{0.5em}
 
 \textcolor{mLightBlue}{13:15 - 14:00} \\
-Exercises
+Working with Data
+\vspace{0.5em}
 
 \textcolor{mLightBlue}{14:00 - 14:15} \\
 Break, Q\&A
+\vspace{0.5em}
 
-\textcolor{mLightBlue}{14:15 - 15:00} \\
-Working with Data
+\textcolor{mLightBlue}{14:15 - 15:15} \\
+Exercises
 \end{column}
 \end{columns}
 
 ### Welcome
 
 \begin{enumerate}
-\tightlist
+\large
 \item \keyword{Fire up} your notebooks!
 
 \vspace{0.3em}
@@ -246,7 +257,6 @@ Working with Data
 :::::: {.columns}
 ::: {.column width="60%"}
 \vspace{1em}
-\Large
 \begin{itemize}
 \item Computers have become \keyword{omnipresent}
 
@@ -491,7 +501,10 @@ You can use RStudio (Posit) Cloud by registering here: [https://posit.cloud/](ht
 
 \item Create a new \important{R Project} in the \texttt{r\_course} folder
 \end{enumerate}
-\normalsize
+
+TODO Add screenshots of Rstudio and explain each part
+TODO Add quick intro to here package for clean project management
+TODO Add how to use copilot?
 
 ### Exercise B: R Scripts
 
@@ -517,7 +530,6 @@ print("Hello world")
 a <- 2  
 a       
 ```
-\normalsize
 
 ### Working with Vectors
 
@@ -531,7 +543,6 @@ names(a) <- c("Andy", "Betty", "Claire",
               "Daniel", "Eva")
 a  # Display the vector
 ```
-\normalsize
 
 ### Indexing
 
@@ -542,7 +553,6 @@ a[3]     # Access the 3rd element
 a[3:5]   # Access the 3rd to 5th elements
 a["Claire"]  # Access by name
 ```
-\normalsize
 
 ### Inspecting variables
 
@@ -551,7 +561,6 @@ class(a)  # Display the class
 
 str(a)    # Display the structure
 ```
-\normalsize
 
 ### Math Operators
 
@@ -590,7 +599,6 @@ for (i in 1:n_iter) {
     print(i)  # Print the number 'i'
 }
 ```
-\normalsize
 
 ### for-loops: Summing numbers
 
@@ -604,7 +612,6 @@ for (n in numbers) {
 }
 total_sum
 ```
-\normalsize
 
 ### Nested for-loops
 
@@ -622,7 +629,6 @@ for (i in 1:n_iter_outer) {
     }
 }
 ```
-\normalsize
 
 How many iterations does this combination amount to?
 
@@ -642,19 +648,17 @@ total
 \normalsize
 -->
 
+
 ### Booleans and Logical Statements
 
-\footnotesize
 ```{r}
 2 + 2 == 4  # Is 2+2 equal to 4?
 3 + 3 == 7  # Is 3+3 equal to 7?
 4 != 7      # Is 4 not equal to 7?
 ```
-\normalsize
 
 ### Control Flow with Booleans
 
-\footnotesize
 ```{r}
 condition <- TRUE
 
@@ -664,7 +668,6 @@ if (condition) {
     print("The condition is false!")
 }
 ```
-\normalsize
 
 ### R Functions
 
@@ -678,18 +681,15 @@ if (condition) {
 
 - Additional functions via \important{packages}
 
-\footnotesize
 ```{r}
 numbers <- c(13, 25, 39, 881)
 mean(numbers)    # Compute the mean
 sd(numbers)      # Standard deviation
 median(numbers)  # Median
 ```
-\normalsize
 
 ### Creating Custom Functions
 
-\footnotesize
 ```{r}
 # Define custom mean function
 my_mean <- function(x) {
@@ -701,13 +701,11 @@ my_mean <- function(x) {
 my_mean(numbers)
 mean(numbers)  # Compare with built-in
 ```
-\normalsize
 
 ## Data Structures and Indices
 
 ### Vectors and Lists
 
-\footnotesize
 ```{r}
 # Integer vector
 integer_vector <- 9:20
@@ -718,13 +716,11 @@ integer_vector[2:5]  # Second to fifth
 string_vector <- c("a", "b", "c")
 string_vector[-3]    # All except third
 ```
-\normalsize
 
 ### Lists
 
 Lists can contain \keyword{different types} of elements:
 
-\footnotesize
 ```{r}
 # Create a list
 my_list <- list(
@@ -734,11 +730,9 @@ my_list <- list(
 )
 str(my_list)
 ```
-\normalsize
 
 ### Accessing List Elements
 
-\footnotesize
 ```{r}
 # Access by name
 my_list$numbers[1:3]
@@ -747,11 +741,9 @@ my_list[["letters"]]
 # Access by index
 my_list[[1]][1:3]
 ```
-\normalsize
 
 ### Matrices
 
-\footnotesize
 ```{r}
 # Create a matrix
 my_matrix <- matrix(integer_vector, nrow = 4)
@@ -760,11 +752,9 @@ my_matrix
 my_matrix[2,]      # Second row
 my_matrix[, 1:2]   # First two columns
 ```
-\normalsize
 
 ### Data Frames
 
-\footnotesize
 ```{r}
 # Create a dataframe
 my_df <- data.frame(
@@ -776,7 +766,6 @@ my_df
 my_df$Age         # Access column
 my_df[2, ]        # Second row
 ```
-\normalsize
 
 ## Exercises
 
@@ -843,7 +832,6 @@ Write a function that computes the sum of all \highlight{prime numbers} up to a 
 
 ### Loading built-in R data sets
 
-\footnotesize
 ```{r}
 # Load built-in dataset
 data(swiss)
@@ -851,26 +839,23 @@ data(swiss)
 # Check if loaded
 class(swiss)
 ```
-\normalsize
+
+\vspace{1.5em}
 
 The `data()` function loads \keyword{built-in R datasets} into your environment.
 
 ### Inspect the data structure
 
-\footnotesize
-```{r}
+```{r, size='footnotesize'}
 # Structure of the swiss dataset
 str(swiss)
 ```
-\normalsize
 
 ### First few rows of the data
 
-\footnotesize
 ```{r}
 head(swiss, 4)
 ```
-\normalsize
 
 ### Comma Separated Values (CSV)
 
@@ -905,18 +890,23 @@ swiss_spss <- read_spss("./data/swiss.sav")
 
 ### What is the Tidyverse?
 
+\textit{"The tidyverse is an opinionated collection of R packages designed for data science. All packages share an underlying design philosophy, grammar, and data structures."}
+
+\vspace{1.5em}
+
 To install and load:
 
 ```{r, eval=FALSE}
-install.packages("tidyverse")
-library(tidyverse)
+install.packages("tidyverse") # Install once
+
+library(tidyverse) # Load in each session
 ```
 
 ### The Pipe Operator `|>`
 
 Transform nested functions into \keyword{readable pipelines}:
 
-```{r, size='footnotesize'}
+```{r, size='footnotesize', eval=FALSE}
 # Traditional approach
 head(select(swiss, Fertility, Education), 3)
 
@@ -925,33 +915,30 @@ swiss |>
   select(Fertility, Education) |> 
   head(3)
 ```
-\normalsize
+
+\vspace{1.5em}
+Note: `|>` is built into R (since version 4.1.0). `%>%` is from the `magrittr` package, which has additional features.
 
 ### Select columns with `select()`
 
-\footnotesize
 ```{r}
 # Select specific columns
 swiss |> 
   select(Fertility, Education, Catholic) |>
   head(3)
 ```
-\normalsize
 
 ### Select columns - Advanced patterns
 
-\footnotesize
 ```{r}
 # Select by pattern
 swiss |> 
-  select(starts_with("E"), contains("Mort")) |>
+  select(starts_with("E") | contains("Mort")) |>
   head(3)
 ```
-\normalsize
 
 ### Filter rows with `filter()`
 
-\footnotesize
 ```{r}
 # Keep rows meeting conditions
 swiss |> 
@@ -959,11 +946,9 @@ swiss |>
   select(Fertility, Education, Catholic) |>
   head()
 ```
-\normalsize
 
 ### Create new variables with `mutate()`
 
-\footnotesize
 ```{r}
 swiss |> 
   mutate(
@@ -974,22 +959,18 @@ swiss |>
          Fertility, Fert_per_100) |>
   head(3)
 ```
-\normalsize
 
 ### Arrange rows with `arrange()`
 
-\footnotesize
 ```{r}
 swiss |> 
   arrange(desc(Education)) |>
   select(Education, Examination) |>
   head(4)
 ```
-\normalsize
 
 ### Summarize data with `summarize()`
 
-\footnotesize
 ```{r}
 swiss |> 
   summarize(
@@ -999,21 +980,14 @@ swiss |>
     n = n()
   )
 ```
-\normalsize
 
 ### Group operations with `group_by()`
 
 \footnotesize
 ```{r}
-# Add Religion variable
-swiss <- swiss |>
-  mutate(Religion = ifelse(Catholic > 50, 
-                          'Catholic', 
-                          'Protestant'))
-
 # Group and summarize
 swiss |> 
-  group_by(Religion) |>
+  group_by(Catholic > 50) |>
   summarize(
     mean_education = mean(Education),
     mean_fertility = mean(Fertility),
@@ -1028,7 +1002,7 @@ swiss |>
 ```{r}
 swiss |> 
   filter(Agriculture < 50) |>
-  group_by(Religion) |>
+  group_by(Catholic > 50) |>
   summarize(
     avg_exam = mean(Examination),
     n = n(),
@@ -1065,36 +1039,40 @@ swiss_subset |>
 ```
 \normalsize
 
-### Join data frames
+### Join data frames (preparation)
 
-\footnotesize
 ```{r}
 # Sample data
 df1 <- data.frame(
-  Province = c("A", "B"),
-  Population = c(5000, 6000)
+  Student_ID = c(2501, 2502, 2503, 2504),
+  Master = c("Mecon", "Mecon", "MiQE/F", "MiQE/F")
 )
 
 df2 <- data.frame(
-  Province = c("A", "B", "C"),
-  Language = c("FR", "FR", "DE")
+  Student_ID = c(2501, 2502, 2503, 2504, 2505, 2506),
+  Grades = c(6, 5, 5.5, 5.5, 4, 5)
 )
 
-# Left join keeps all rows from df1
-left_join(df1, df2, by = "Province")
 ```
-\normalsize
+
+### Join data frames
+
+```{r}
+# Left join keeps all rows from df1
+left_join(df1, df2, by = "Student_ID")
+```
+
+### Working with dates using lubridate (preparation)
+
+```{r}
+# Create and parse dates
+dates <- c("2025-09-05", "2025-09-06")
+parsed_dates <- ymd(dates)
+```
 
 ### Working with dates using lubridate
 
-\footnotesize
 ```{r}
-library(lubridate)
-
-# Create and parse dates
-dates <- c("2023-09-08", "2023-09-15")
-parsed_dates <- ymd(dates)
-
 # Extract components
 data.frame(
   date = parsed_dates,
@@ -1103,38 +1081,30 @@ data.frame(
   weekday = wday(parsed_dates, label = TRUE)
 )
 ```
-\normalsize
 
-### Advanced tidyverse: map functions
+### purrr: map functions 
 
-\footnotesize
 ```{r}
 # Apply a function to multiple columns
 swiss |>
   select(Fertility, Agriculture, Education) |>
-  map_dbl(~ mean(.x)) |>
+  map_dbl(mean) |>
   round(2)
 ```
-\normalsize
 
 ### String manipulation with stringr
 
-\footnotesize
 ```{r}
-library(stringr)
-
-# Example text
-provinces <- c("Courtelary", "Delemont", "Franches-Mnt")
+masters <- c("Mecon", "MiQE/F", "MACFin") # Example text
 
 # String operations
-data.frame(
-  original = provinces,
-  lower = str_to_lower(provinces),
-  length = str_length(provinces),
-  contains_e = str_detect(provinces, "e")
+tibble(
+  original = masters,
+  lower = str_to_lower(masters),
+  length = str_length(masters),
+  contains_e = str_detect(masters, "e")
 )
 ```
-\normalsize
 
 ## Visualization with R (ggplot2)
 
@@ -1145,7 +1115,6 @@ data.frame(
 
 ### ggplot2 basics
 
-\footnotesize
 ```{r, eval=FALSE}
 # Basic structure
 ggplot(data = <DATA>, 
@@ -1153,35 +1122,28 @@ ggplot(data = <DATA>,
   <GEOM_FUNCTION>() +
   <OPTIONAL_LAYERS>
 ```
-\normalsize
 
 ### Prepare the data
 
-\footnotesize
 ```{r}
 # Add Religion indicator
-swiss$Religion <- factor(
-  ifelse(swiss$Catholic > 50, 
-         'Catholic', 'Protestant')
-)
+swiss <- swiss |> 
+  mutate(Religion = ifelse(Catholic > 50, 
+                           'Catholic', 'Protestant') |> factor())
 
 # Check the data
 table(swiss$Religion)
 ```
-\normalsize
 
 ### Building a plot: Data + Aesthetics
 
-\footnotesize
 ```{r data-aes, fig.height=2}
 ggplot(data = swiss, 
        aes(x = Education, y = Examination))
 ```
-\normalsize
 
 ### Adding Geometries
 
-\footnotesize
 ```{r geom, fig.height=2}
 ggplot(data = swiss, 
        aes(x = Education, y = Examination)) + 
@@ -1201,7 +1163,7 @@ ggplot(data = swiss,
 
 ### Adding Statistics with loess
 
-\footnotesize
+\SetCodeSize{\footnotesize}
 ```{r stat-loess, fig.height=2}
 ggplot(data = swiss, 
        aes(x = Education, y = Examination)) + 
@@ -1209,11 +1171,10 @@ ggplot(data = swiss,
   geom_smooth(method = 'loess') +
   facet_wrap(~Religion)
 ```
-\normalsize
 
 ### Adding Statistics with lm
 
-\footnotesize
+\SetCodeSize{\footnotesize}
 ```{r stat-lm, fig.height=2}
 ggplot(data = swiss, 
        aes(x = Education, y = Examination)) + 
@@ -1221,65 +1182,57 @@ ggplot(data = swiss,
   geom_smooth(method = 'lm', se = FALSE) +
   facet_wrap(~Religion)
 ```
-\normalsize
 
 ### Multiple Aesthetics
 
-\footnotesize
-```{r multi-aes, fig.height=2}
+\SetCodeSize{\footnotesize}
+```{r multi-aes, fig.height=1.75}
 ggplot(data = swiss, 
        aes(x = Education, y = Examination)) + 
   geom_point(aes(color = Agriculture), size = 2) +
   geom_smooth(method = 'lm', se = FALSE) +
   facet_wrap(~Religion) +
-  scale_color_gradient(low = "blue", high = "red") +
   theme(legend.position = "right")
 ```
-\normalsize
 
 ### Change coordinates
 
-\footnotesize
-```{r coord-flip, fig.height=2}
+\SetCodeSize{\footnotesize}
+```{r coord-flip, fig.height=1.75}
 ggplot(data = swiss, 
        aes(x = Education, y = Examination)) + 
-  geom_point(aes(color = Agriculture)) +
+  geom_point() +
   geom_smooth(method = 'lm', se = FALSE) +
   facet_wrap(~Religion) + 
   coord_flip()
 ```
-\normalsize
 
 ### Customizing Themes
 
-\footnotesize
-```{r theme-custom, fig.height=2}
+\SetCodeSize{\footnotesize}
+```{r theme-custom, fig.height=1.75}
 ggplot(data = swiss, 
        aes(x = Education, y = Examination)) + 
-  geom_point(aes(color = Agriculture)) +
+  geom_point() +
   geom_smooth(method = 'lm', se = FALSE) +
   facet_wrap(~Religion) + 
-  theme_minimal() +
-  theme(legend.position = "bottom")
+  theme_minimal()
 ```
-\normalsize
 
 ### Pre-built Themes
 
-\footnotesize
-```{r theme-dark, fig.height=2}
+\SetCodeSize{\footnotesize}
+```{r theme-dark, fig.height=1.75}
 ggplot(data = swiss, 
        aes(x = Education, y = Examination)) + 
-  geom_point(aes(color = Agriculture)) +
+  geom_point() +
   geom_smooth(method = 'lm', se = FALSE) +
   facet_wrap(~Religion) + 
   theme_dark()
 ```
-\normalsize
 
 ### Save plots
 
-\footnotesize
 ```{r, eval=FALSE}
 # Save the last plot
 ggsave("my_plot.png", 
@@ -1293,29 +1246,29 @@ p <- ggplot(swiss, aes(Education, Examination)) +
 ggsave("scatter.pdf", plot = p,
        width = 6, height = 4)
 ```
-\normalsize
 
 ## Basic Statistics with R
 
 ### Descriptive Statistics
 
-\footnotesize
+\SetCodeSize{\footnotesize}
 ```{r}
 # Create sample data
 x <- c(10, 22, 33, 22, 40)
 
 # Basic statistics
-c(mean = mean(x),
+tibble(
+  mean = mean(x),
   median = median(x),
   sd = sd(x),
   min = min(x),
-  max = max(x))
+  max = max(x)
+)
 ```
-\normalsize
 
 ### T-test Example
 
-\footnotesize
+\SetCodeSize{\footnotesize}
 ```{r}
 # Generate sample data
 set.seed(123)
@@ -1326,11 +1279,9 @@ t_result <- t.test(sample, mu = 10)
 t_result$p.value
 t_result$conf.int
 ```
-\normalsize
 
 ### Linear Regression - Setup
 
-\footnotesize
 ```{r}
 # Define the model formula
 model1 <- Examination ~ Education
@@ -1339,28 +1290,20 @@ model1 <- Examination ~ Education
 fit1 <- lm(model1, data = swiss)
 
 # View coefficients
-coef(fit1)
+coef(fit1) # Use 'summary(fit1)' for more details
 ```
-\normalsize
-
-### Simple Linear Regression - Results
-
-\tiny
-```{r}
-summary(fit1)
-```
-\normalsize
 
 ### Multiple Linear Regression
 
 \footnotesize
 ```{r}
 # Fit model with multiple predictors
-fit2 <- lm(Examination ~ Education + Catholic + 
-           Agriculture, data = swiss)
+fit2 <- lm(Examination ~ Education + Catholic + Agriculture, 
+           data = swiss)
 
 # Model fit statistics
-c(R2 = summary(fit2)$r.squared,
+tibble(
+  R2 = summary(fit2)$r.squared,
   Adj_R2 = summary(fit2)$adj.r.squared,
   RMSE = sigma(fit2))
 ```
@@ -1378,7 +1321,7 @@ round(coef_summary, 3)
 
 ### Other Econometric Models
 
-\footnotesize
+\SetCodeSize{\footnotesize}
 ```{r, eval=FALSE}
 # Binary outcomes - Logit
 glm(y ~ x1 + x2, 
@@ -1392,42 +1335,29 @@ glm(y ~ x1 + x2,
 glm(y ~ x1 + x2, 
     family = poisson())
 
-# Panel data - Fixed effects (requires plm)
-library(plm)
-plm(y ~ x1 + x2, 
-    data = panel_data,
-    model = "within")
+# Panel data - Fixed effects
+library(fixest) # install.packages("fixest")
+feols(y ~ x1 + x2 | x3, 
+    data = panel_data)
 ```
-\normalsize
 
 ### Print Regression Results - Console
 
 \tiny
-```{r, results='asis'}
-# Basic regression table
-stargazer(fit1, fit2, 
-          type = "text",
-          digits = 2,
-          star.cutoffs = c(0.05, 0.01, 0.001),
-          omit.stat = c("ser", "f"),
-          column.sep.width = "1pt")
-```
-\normalsize
-
-### Export Results to LaTeX
-
-\footnotesize
 ```{r, eval=FALSE}
-# For LaTeX documents
-stargazer(fit1, fit2,
-          type = "latex",
-          title = "Regression Results",
-          label = "tab:reg",
-          digits = 2,
-          header = FALSE,
-          font.size = "small",
-          column.sep.width = "1pt",
-          single.row = TRUE)
+# Basic regression table
+library(modelsummary)
+
+models <- list(
+  "Model 1" = lm(Examination ~ Education, 
+                 data = swiss),
+  "Model 2" = lm(Examination ~ Education + Catholic + Agriculture, 
+                  data = swiss)
+)
+
+modelsummary(models, 
+             stars = TRUE,
+             gof_omit = "AIC|BIC|Log.Lik.")
 ```
 \normalsize
 
@@ -1435,19 +1365,18 @@ stargazer(fit1, fit2,
 
 \footnotesize
 ```{r, eval=FALSE}
-# Save as LaTeX file
-stargazer(fit1, fit2,
-          type = "latex",
-          out = "./results/regression_table.tex",
-          title = "Swiss Data Analysis",
-          covariate.labels = c("Education (years)",
-                              "Catholic (%)",
-                              "Agriculture (%)"))
+# Save table directly to file
+modelsummary(models, output = "table.docx")
+modelsummary(models, output = "table.html")
+modelsummary(models, output = "table.tex")
+modelsummary(models, output = "table.md")
+modelsummary(models, output = "table.txt")
+modelsummary(models, output = "table.png")
 
-# Save as HTML
-stargazer(fit1, fit2,
-          type = "html",
-          out = "./results/regression_table.html")
+# Raw table
+modelsummary(models, output = "html")
+modelsummary(models, output = "latex")
+modelsummary(models, output = "markdown")
 ```
 \normalsize
 

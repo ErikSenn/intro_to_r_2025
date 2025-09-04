@@ -2,7 +2,7 @@
 # Sample Solution
 
 # Required Libraries
-library(ggplot2)
+library(tidyverse)
 
 # 1. Load the dataset swiss.csv or call data(swiss). 
 data(swiss)

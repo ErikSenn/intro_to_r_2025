@@ -30,15 +30,15 @@ This course introduces students to the fundamental practices of programming with
 
 |Time|Content|
 |--:|:--|
-|09:15 - 10:00|Introduction, Background, Tools|
+|09:15 - 10:00|Introduction, Background, Tools, First steps with R|
 |10:00 - 10:15|Break, support with installations|
-|10:15 - 11:00|First steps with R|
+|10:15 - 11:00|Exercises, Basic Concepts|
 |11:00 - 11:15|Break, Q&A|
-|11:15 - 12:00|Exercises|
-|12:00 - 13:30|Lunch break|
-|13:30 - 14:15|Working with data|
+|11:15 - 11:45|Exercises, Basic Concepts|
+|11:45 - 13:15|Lunch break|
+|13:15 - 14:00|Working with data|
 |14:15 - 14:30|Break, Q&A|
-|14:30 - 15:30|Exercises|
+|14:30 - 15:15|Exercises|
 
 ## Examination
 There is no examination.
