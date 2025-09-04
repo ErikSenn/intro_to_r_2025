@@ -289,8 +289,15 @@ Exercises
 
 ### Programming in the age of AI-assistance
 
+AI assistants are powerful for many coding tasks, but might do 'stupid' hard to spot mistakes.
 
-### Why R?
+- \keyword{Understand code}: AI-usage requires coding skills to evaluate suggestions (bugs, efficiency, security)
+- \accenttext{Problem solving}: Structuring the analysis and adapting solutions are harder to automate.
+- Blindly prompting AI for simple tasks hinders learning. 
+
+**Recommendation:** use \highlight{AI as a teacher} for programming
+
+## Why R?
 
 ### A data language
 
@@ -333,7 +340,7 @@ Exercises
 ::::::
 
 
-## The Tools for Today
+## Tools for this workshop 
 
 ### R
 
@@ -343,7 +350,7 @@ You can download R from: [https://cran.r-project.org/](https://cran.r-project.or
 
 ### Rstudio desktop
 
-\keyword{RStudio} is the \accenttext{integrated development environment (IDE).}
+\keyword{RStudio} is the most popular \accenttext{integrated development environment (IDE).} for R, giving a useful visual interface for key programming tasks.
 
 You can download RStudio Desktop from: [https://posit.co/download/rstudio-desktop/](https://posit.co/download/rstudio-desktop/)
 
@@ -356,125 +363,42 @@ You can use RStudio (Posit) Cloud by registering here: [https://posit.cloud/](ht
 
 ## An R-Studio Interface Tour
 
-<!--
+### RStudio overview
 
-\frametitle{RStudio}
+- \highlight{Console}: run R commands directly, quick testing  
+- \highlight{Environment / Files}: see variables, data, manage plots & files  
+- \highlight{Help / Viewer}: access documentation, view HTML output/plots
 
-\vspace{-15pt}
+
+### RStudio interface
+
+![](img/RstudioGUI.png){width=90%}
+
+### Scripts in RStudio
+
+- Write and save code in `.R` files  
+- Run selected lines (`Ctrl+Enter`)  
+- Keep work reproducible  
+
+![](img/RScriptWin.png){width=70%}
+
+
+### Working directories & R projects
+
+- **Working directory** = folder where R looks for files, e.g. data to load.
+- Use `getwd()` and `setwd()`
+- Better: **R Projects**  
+  - Define self-contained working environments  
+  - Save code, data, outputs together  
+  - Makes collaboration & reproducibility easier  
+
+### Other tools in R-studio
+
 \begin{itemize}
-	\item the most popular IDE to work in R
-	\item IDE (integrated development environment) = software application for software development integrating several developer tools into one user interface
-	\item opening R Studio opens an R Session with:
-	\begin{itemize}
-		\item \textbf{Console Window} = here the commands are typed and results are returned
-		\item \textbf{Environment / History} = shows all objects created in the current R session (Environment tab) and all commands used (History tab)
-		\item \textbf{Files / Plots / Packages / Help} = primarily used to see the files system (Files tab), created plots (Plots tab), install or check available packages (Packages tab) and documentation (Help tab) 
-	\end{itemize}
+  \item Help window for documentation
+  \item Visual interfaces for file navigation, packages, exporting plots, loading data, ...
+  \item Debugging, profiling, git for version control, AI integration (Copilot)
 \end{itemize}
-}
-
-\frame{
-	\begin{center}
-		\includegraphics[width=\textwidth]{RstudioGUI.png}
-	\end{center}
-
-%	\textbf{Task:} Type 2+2 into the console and press Enter.
-
-}
-
-\Section{R Scripts}
-
-\frame{
-	
-	\frametitle{R Scripts}
-	\vspace{-15pt}
-	\begin{itemize}
-		\item R code can be written directly into the R Console or it can be typed as a simple text file (R Script) that is later run in the console
-		\item advantage of R scripts: code is saved in a file that can be re-run, augmented and shared at any time.
-	\end{itemize}
-	
-}
-
-
-
-
-\frame{
-	
-	\begin{center}
-		\textbf{Task 1:}
-		\vspace{10pt}
-		\begin{itemize}
-			\centering
-			\item Click on \textbf{File - New File - R Script} \\
-			\item Save the new R script (File - Save or Ctrl + S or CMD + S on MacOS) into the folder ``01-Basics'' under a name ``01-Basics.R''
-		\end{itemize}
-	\end{center}
-}
-
-\frame{
-	
-	\begin{center}
-		\includegraphics[width=\textwidth]{RscriptWin.png}
-	\end{center}
-	
-}
-
-\frame{
-	
-	\frametitle{Writing and Running Scripts}
-	
-	\vspace{-15pt}
-	\begin{itemize}
-		\item any text after \# is interpreted as a comment
-		\item any other text is interpreted as active code
-		\item to run the whole script press Ctrl + Shift + Enter (CMD + Shift + Enter on MacOS)
-		\item to run only a part of the script, select all lines that should run and press Ctrl + Enter (CMD + Enter on MacOS)
-	\end{itemize}
-	
-}
-
-\Section{Working Directory}
-
-\frame{
-	
-	\frametitle{Working Directory}
-	
-	\vspace{-15pt}
-	\begin{itemize}
-		\item R will save your reults into the current working directory
-		\item to find out what the current working directory is, run {\color{blue} \texttt{getwd()}} in the console
-		\item changing the working directory can be done via
-		\begin{itemize}
-			\item Session > Set Working Directory > Choose Directory, click to the new directory and confirm by clicking on Open
-			\item or use function {\color{blue} \texttt{setwd()}} with the path leading to the new directory
-			\item[] E.g. {\color{blue} \texttt{setwd(``c:/user/R/Tutorial1'')}}
-		\end{itemize}
-	\end{itemize}
-	
-}
-
-\Section{R Help}
-
-\frame{
-	\frametitle{R help}
-	
-	\vspace{-15pt}
-	\begin{itemize}
-		\item if the name of the function is known, type \texttt{?} and the name of the function 
-		\item[] E.g. {\color{blue} \texttt{?getwd}}
-		\item this will open the help for the function
-		\item if function is in a package, clicking in the Packages menu on the package and the function leads to its documentation
-		\item otherwise, Google is a good friend
-	\end{itemize}
-	
-}
-
-## R-projects / relation to paths/working directory
-
-## Possibly: reference to useful features - git, data import visual interface, git, automatic ai-assistance.
-
-
--->
 
 
 ## Exercises
@@ -500,11 +424,11 @@ You can use RStudio (Posit) Cloud by registering here: [https://posit.cloud/](ht
 \vspace{0.3em}
 
 \item Create a new \important{R Project} in the \texttt{r\_course} folder
-\end{enumerate}
 
-TODO Add screenshots of Rstudio and explain each part
-TODO Add quick intro to here package for clean project management
-TODO Add how to use copilot?
+\vspace{0.3em}
+
+\item[(*)] Choose your favorite R-studio \important{appearance}: `Tools > Global Options > Appearance`  
+\end{enumerate}
 
 ### Exercise b: r scripts
 
@@ -514,9 +438,9 @@ TODO Add how to use copilot?
 print("Hello world")
 ```
 
-2. Create a new \keyword{R script}: `File > New File > R Script`
+2. Create a new \keyword{R script}: `File > New File > R Script` (or `Ctrl+Shift+N`)
 
-3. Type the same code in the script and \accenttext{run it}
+3. Type the same code in the script and \accenttext{run it} using `Ctrl+Enter` or `Ctrl+As+Enter`
 
 \normalsize
 
@@ -1382,7 +1306,7 @@ modelsummary(models, output = "markdown")
 
 # Final Remarks {.section}
 
-### Best practices for r programming
+### Some best practices for R programming
 
 \small
 1. \keyword{Organization}
@@ -1405,7 +1329,7 @@ modelsummary(models, output = "markdown")
    - Document package versions (or with with projects / environments)
 \normalsize
 
-### Resources for learning r
+### Resources for learning R
 
 :::::: {.columns}
 ::: {.column width="50%"}
@@ -1444,7 +1368,33 @@ modelsummary(models, output = "markdown")
 :::
 ::::::
 
-### An example on ai assistance for learning coding
+<!-- ### An example on ai assistance for learning coding -->
+
+### Example prompts to use AI as programming teacher
+
+**Bad prompt**
+
+- *“Please solve this coding assignment.”*  
+- *“Here’s my code, please fix it.”*
+
+---
+
+**Better prompt**
+
+*“The code below yields a variable type error. Please correct it and explain my mistake.”*  
+
+---
+
+**Good prompt:**
+
+- **System prompt**  
+*“I am learning to code in R and want to use you as a teacher.  
+Please guide me to find the solution myself, not just give the answer.”*  
+
+- **Question prompt**  
+*“This code should do [A], but instead does [B].  
+I think the issue is in line [X–Y], where I meant to do [C].  
+Can you give me a hint?”*
 
 
 
@@ -1477,7 +1427,7 @@ Contents: Similar contents as today in slower pace. Automated reports using R-ma
 
 
 <div style="text-align: center;">
-  ![](survey_qr.png){width=35%}
+  ![](img/survey_qr.png){width=35%}
 </div>
 
 \begin{center}
