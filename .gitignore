@@ -48,3 +48,12 @@ intro-to-r-2023.Rproj
 *.AppleDouble
 *.LSOverride
 code_sample_solutions/example.R
+slides/intro_to_r_slides_files/figure-beamer/coord-flip-1.pdf
+slides/intro_to_r_slides_files/figure-beamer/data-aes-1.pdf
+slides/intro_to_r_slides_files/figure-beamer/facet-1.pdf
+slides/intro_to_r_slides_files/figure-beamer/geom-1.pdf
+slides/intro_to_r_slides_files/figure-beamer/multi-aes-1.pdf
+slides/intro_to_r_slides_files/figure-beamer/stat-lm-1.pdf
+slides/intro_to_r_slides_files/figure-beamer/stat-loess-1.pdf
+slides/intro_to_r_slides_files/figure-beamer/theme-custom-1.pdf
+slides/intro_to_r_slides_files/figure-beamer/theme-dark-1.pdf

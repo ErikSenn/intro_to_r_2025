@@ -424,7 +424,7 @@ You can use RStudio (Posit) Cloud by registering here: [https://posit.cloud/](ht
 
 \vspace{0.3em}
 
-\item Create a new \important{R Project} in the \texttt{r\_course} folder
+\item[(*)] Create a new \important{R Project} in the \texttt{r\_course} folder
 
 \vspace{0.3em}
 
@@ -447,7 +447,7 @@ print("Hello world")
 
 # Part II: First Steps and Basic Concepts {.section}
 
-## First steps in r
+## First steps in R
 
 ### Variables and vectors
 
@@ -557,7 +557,6 @@ for (i in 1:n_iter_outer) {
 
 How many iterations does this combination amount to?
 
-<!--
 ### While-loops in r
 
 ```{r}
@@ -571,7 +570,6 @@ while (total <= 10) {
 total
 ```
 \normalsize
--->
 
 
 ### Booleans and logical statements
@@ -580,6 +578,14 @@ total
 2 + 2 == 4  # Is 2+2 equal to 4?
 3 + 3 == 7  # Is 3+3 equal to 7?
 4 != 7      # Is 4 not equal to 7?
+```
+
+```{r}
+!TRUE  # negation using '!'
+TRUE & FALSE # logical AND
+TRUE | FALSE # logical OR
+c(TRUE,TRUE) & c(FALSE,TRUE) # element-wise comparison
+all(c(TRUE, TRUE) & c(FALSE, TRUE)) # are ALL elements the same?
 ```
 
 ### Control flow with booleans
@@ -623,9 +629,25 @@ my_mean <- function(x) {
 }
 
 # Test the function
-my_mean(numbers)
+my_mean(numbers)  # call the function with the input argument 
 mean(numbers)  # Compare with built-in
 ```
+### Loading functions from packages
+
+<!-- - Install packages once using `install.packages("<package_name>")` -->
+<!-- - Load packages in each session using `library(<package_name>)`.  -->
+
+```{r}
+install.packages("dplyr") # Install (from CRAN): run once
+library(dplyr) # Load the package: run each session
+
+# Example: call dplyr's summarise() to compute the mean
+mean_tidyverse <- data.frame(x = numbers) |>
+  summarise(avg = mean(x))
+as.numeric(mean_tidyverse) # display mean as number
+```
+
+**Note**: use 'package_name::function_name()' when multiple packages have functions of the same name to avoid ambiguities.
 
 ## Data Structures and Indices
 
@@ -1055,6 +1077,7 @@ tibble(
 ```{r, eval=FALSE}
 # Basic structure
 ggplot(data = <DATA>, 
+       
        mapping = aes(x = <X>, y = <Y>)) +
   <GEOM_FUNCTION>() +
   <OPTIONAL_LAYERS>
@@ -1094,7 +1117,6 @@ ggplot(data = swiss,
 ggplot(data = swiss, 
        aes(x = Education, y = Examination)) + 
   geom_point(size = 3, alpha = 0.7, aes(color = Religion)) +
-  scale_color_modern() +
   facet_wrap(~Religion)
 ```
 
