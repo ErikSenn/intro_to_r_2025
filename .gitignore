@@ -47,3 +47,4 @@ intro-to-r-2023.Rproj
 *.DS_Store
 *.AppleDouble
 *.LSOverride
+code_sample_solutions/example.R
