@@ -1033,53 +1033,6 @@ tibble(
 )
 ```
 
-## Exercise i: Working with Data using dplyr
-
-
-### Exercise i.1
-- Load the dataset with `data(swiss)`  
-- Use `mutate()` to create two new variables:  
-  - `UrbanizationRate`: the inverse of Agriculture (100 – Agriculture)  
-  - `FertilityCategory`: a factor variable with levels:  
-    - 0–60 → "Low"  
-    - 60–80 → "Medium"  
-    - 80–100 → "High"  
-- Hint: use `case_when()` for categorization  
-
-
-### Exercise i.2
-- Filter observations where Fertility > 70  
-- Arrange results by `Education` in descending order  
-
----
-
-### Exercise i.3
-- Group data by `FertilityCategory`  
-- Calculate average `Education` for each category using `group_by()` and `summarize()`  
-
-
-### Exercise i.4
-- Find the top 3 observations with highest Fertility values  
-- Display only `Fertility` and `Education` columns  
-
-
-### Exercise i.5
-- Create `EducationToFertilityRatio = Education / Fertility`  
-- Show all observations where the ratio is between 0.1 and 0.2  
-
-### Exercise i.6
-- Group by `FertilityCategory`  
-- Calculate:  
-  - Median Fertility  
-  - Standard deviation of Education  
-- Store the results in a new data frame  
-
-
-### Exercise i.7
-- Use `n_distinct()` to determine the number of distinct values in:  
-  - `Education`  
-  - `FertilityCategory`  
-
 
 ## Visualization with R (ggplot2)
 
@@ -1223,41 +1176,6 @@ ggsave("scatter.pdf", plot = p,
 ```
 
 
-## Exercise j: Visualizing Data
-
-### Exercise j.1
-- Load the dataset `swiss.csv` or call `data(swiss)`
-
-### Exercise j.2
-- Print the last 3 observations of the dataset  
-- Create summary statistics for all variables  
-
-### Exercise j.3
-- Create new variables:  
-  - `UrbanizationRate` = 100 – Agriculture  
-  - `FertilityCategory`:  
-    - 0–60 → "Low"  
-    - 60–80 → "Medium"  
-    - 80–100 → "High"  
-- Hint: use `cut()`  
-
-### Exercise j.4
-- Create a histogram of `Fertility`  
-  - Fill bars in dark blue  
-  - Add a minimal theme  
-
-### Exercise j.5
-- Create a boxplot of the variable `Education`  
-
-### Exercise j.6
-- Create a scatter plot of `Education` vs. `Fertility`  
-- Add a regression line (linear model)  
-
-### Exercise j.7
-- Create scatter plots of `Agriculture` vs. `Examination`  
-- Show them separately for each `FertilityCategory` using `facet_wrap()`  
-
-
 
 ## Basic Statistics with R
 
@@ -1391,6 +1309,90 @@ modelsummary(models, output = "latex")
 modelsummary(models, output = "markdown")
 ```
 \normalsize
+
+## Exercise i: Working with Data using dplyr
+
+
+### Exercise i.1
+- Load the dataset with `data(swiss)`  
+- Use `mutate()` to create two new variables:  
+  - `UrbanizationRate`: the inverse of Agriculture (100 – Agriculture)  
+  - `FertilityCategory`: a factor variable with levels:  
+    - 0–60 → "Low"  
+    - 60–80 → "Medium"  
+    - 80–100 → "High"  
+- Hint: use `case_when()` for categorization  
+
+
+### Exercise i.2
+- Filter observations where Fertility > 70  
+- Arrange results by `Education` in descending order  
+
+---
+
+### Exercise i.3
+- Group data by `FertilityCategory`  
+- Calculate average `Education` for each category using `group_by()` and `summarize()`  
+
+
+### Exercise i.4
+- Find the top 3 observations with highest Fertility values  
+- Display only `Fertility` and `Education` columns  
+
+
+### Exercise i.5
+- Create `EducationToFertilityRatio = Education / Fertility`  
+- Show all observations where the ratio is between 0.1 and 0.2  
+
+### Exercise i.6
+- Group by `FertilityCategory`  
+- Calculate:  
+  - Median Fertility  
+  - Standard deviation of Education  
+- Store the results in a new data frame  
+
+
+### Exercise i.7
+- Use `n_distinct()` to determine the number of distinct values in:  
+  - `Education`  
+  - `FertilityCategory`  
+
+## Exercise j: Visualizing Data
+
+### Exercise j.1
+- Load the dataset `swiss.csv` or call `data(swiss)`
+
+### Exercise j.2
+- Print the last 3 observations of the dataset  
+- Create summary statistics for all variables  
+
+### Exercise j.3
+- Create new variables:  
+  - `UrbanizationRate` = 100 – Agriculture  
+  - `FertilityCategory`:  
+    - 0–60 → "Low"  
+    - 60–80 → "Medium"  
+    - 80–100 → "High"  
+- Hint: use `cut()`  
+
+### Exercise j.4
+- Create a histogram of `Fertility`  
+  - Fill bars in dark blue  
+  - Add a minimal theme  
+
+### Exercise j.5
+- Create a boxplot of the variable `Education`  
+
+### Exercise j.6
+- Create a scatter plot of `Education` vs. `Fertility`  
+- Add a regression line (linear model)  
+
+### Exercise j.7
+- Create scatter plots of `Agriculture` vs. `Examination`  
+- Show them separately for each `FertilityCategory` using `facet_wrap()`  
+
+
+
 
 # Final Remarks {.section}
 
