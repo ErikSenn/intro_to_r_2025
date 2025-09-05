@@ -1,4 +1,4 @@
-# Exercise L: Working with data
+# Exercise L: Visualizing Data
 # Sample Solution
 
 # Required Libraries
